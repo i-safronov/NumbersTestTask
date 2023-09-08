@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="title" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:textSize">@dimen/title_size</item>
+    </style>
+
+    <style name="text" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/text_size</item>
+    </style>
+
+    <style name="edit_text" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:backgroundTint">@color/gray</item>
+    </style>
+
+</resources>

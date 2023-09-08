@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screen.fragment.main_page.FragmentMainPage">
+    tools:context=".presentation.screen.fragment.main_page.FragmentMainPage"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_normal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edtv_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/edit_text" />
+
+    <Button
+        android:id="@+id/btn_get_number_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/get_number_information"
+        android:enabled="false" />
+
+    <Button
+        android:id="@+id/btn_get_random_number_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/get_rundom_number_info"
+        android:enabled="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_user_numbers_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="@dimen/margin_normal"/>
 
-</FrameLayout>
+</LinearLayout>

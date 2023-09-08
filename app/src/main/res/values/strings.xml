@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">NumbersTestTask</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="get_number_information">Получить информацию о числе</string>
+    <string name="get_rundom_number_info">Получить информацию об рандомном числе</string>
 </resources>
