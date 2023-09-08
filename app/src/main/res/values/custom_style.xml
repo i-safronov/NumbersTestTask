@@ -6,6 +6,12 @@
         <item name="android:textSize">@dimen/title_size</item>
     </style>
 
+    <style name="big_title" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/title_color</item>
+        <item name="android:textSize">@dimen/big_title_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="text" parent="Widget.AppCompat.TextView">
         <item name="android:textColor">@color/text_color</item>
         <item name="android:textSize">@dimen/text_size</item>

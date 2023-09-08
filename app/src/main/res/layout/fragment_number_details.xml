@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.screen.fragment.number_details.FragmentNumberDetails">
+    tools:context=".presentation.screen.fragment.number_details.FragmentNumberDetails"
+    android:padding="@dimen/padding_normal">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="781"
+            android:gravity="center"
+            style="@style/big_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_number_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/text"
+            tools:text="@string/lorem_ipsum"
+            android:layout_marginTop="@dimen/margin_normal" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
