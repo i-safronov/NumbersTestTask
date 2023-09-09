@@ -12,32 +12,35 @@ public class UserNumberHistoryEntity {
 
     @ColumnInfo
     private @Nullable
-    NumberModel numberModel;
+    String number;
     @ColumnInfo
     private @Nullable
-    NumberInformationModel numberInformationModel;
+    String numberInfo;
     @PrimaryKey(autoGenerate = true)
     private int primaryKey;
 
-    public UserNumberHistoryEntity(@Nullable NumberModel numberModel, @Nullable NumberInformationModel numberInformationModel) {
-        this.numberModel = numberModel;
-        this.numberInformationModel = numberInformationModel;
+    public UserNumberHistoryEntity(@Nullable String number, @Nullable String numberInfo, int primaryKey) {
+        this.number = number;
+        this.numberInfo = numberInfo;
+        this.primaryKey = primaryKey;
     }
 
-    public NumberModel getNumberModel() {
-        return numberModel;
+    @Nullable
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumberModel(NumberModel numberModel) {
-        this.numberModel = numberModel;
+    public void setNumber(@Nullable String number) {
+        this.number = number;
     }
 
-    public NumberInformationModel getNumberInformationModel() {
-        return numberInformationModel;
+    @Nullable
+    public String getNumberInfo() {
+        return numberInfo;
     }
 
-    public void setNumberInformationModel(NumberInformationModel numberInformationModel) {
-        this.numberInformationModel = numberInformationModel;
+    public void setNumberInfo(@Nullable String numberInfo) {
+        this.numberInfo = numberInfo;
     }
 
     public int getPrimaryKey() {
@@ -47,5 +50,4 @@ public class UserNumberHistoryEntity {
     public void setPrimaryKey(int primaryKey) {
         this.primaryKey = primaryKey;
     }
-
 }

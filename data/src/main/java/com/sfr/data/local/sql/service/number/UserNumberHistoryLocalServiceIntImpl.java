@@ -4,8 +4,7 @@ import com.sfr.data.exception.DataException;
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import com.sfr.data.local.sql.dao.number.UserNumberHistoryDao;
 import java.util.List;
-
-import kotlinx.coroutines.flow.Flow;
+import io.reactivex.rxjava3.core.Flowable;
 
 public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLocalServiceInt {
 
@@ -16,7 +15,7 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
-    public Flow<List<UserNumberHistoryEntity>> getUserNumbersHistory() {
+    public Flowable<List<UserNumberHistoryEntity>> getUserNumbersHistory() {
         try {
             return userNumberHistoryDao.getUserNumbersHistory();
         } catch (Exception e) {

@@ -1,14 +1,12 @@
 package com.sfr.data.local.sql.service.number;
 
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
-
 import java.util.List;
-
-import kotlinx.coroutines.flow.Flow;
+import io.reactivex.rxjava3.core.Flowable;
 
 public interface UserNumberHistoryLocalServiceInt {
 
-    Flow<List<UserNumberHistoryEntity>> getUserNumbersHistory();
+    Flowable<List<UserNumberHistoryEntity>> getUserNumbersHistory();
     UserNumberHistoryEntity saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory);
     UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(int primaryKey);
 
