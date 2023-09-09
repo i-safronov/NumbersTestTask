@@ -21,57 +21,34 @@ public class NumberRemoteServiceIntImpl implements NumberRemoteServiceInt {
     }
 
     @Override
-    public void getNumberInformation(NumberModel numberModel, Result<NumberInformationModel> result) {
+    public NumberInformationModel getNumberInformation(NumberModel numberModel) {
         try {
             Call<String> request = numberApi.getNumberInformation(numberModel.getNumber());
-            request.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        assert response.body() != null;
-                        result.onSuccess(
-                                new NumberInformationModel(response.body())
-                        );
-                    } else {
-                        throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    throw new DataException("On failure from server: " + t.getMessage(), t);
-                }
-            });
+            Response<String> response = request.execute();
+            if (response.isSuccessful()) {
+                assert response.body() != null;
+                return new NumberInformationModel(response.body());
+            } else {
+                throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
+            }
         } catch (Exception e) {
             throw new DataException("Data exception: " + e.getMessage(), e);
         }
     }
 
     @Override
-    public void getRandomNumberInformation(Result<NumberInformationModel> result) {
+    public NumberInformationModel getRandomNumberInformation() {
         try {
             Call<String> request = numberApi.getRandomNumberInformation();
-            request.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        assert response.body() != null;
-                        result.onSuccess(
-                                new NumberInformationModel(response.body())
-                        );
-                    } else {
-                        throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    throw new DataException("On failure from server: " + t.getMessage(), t);
-                }
-            });
+            Response<String> response = request.execute();
+            if (response.isSuccessful()) {
+                assert response.body() != null;
+                return new NumberInformationModel(response.body());
+            } else {
+                throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
+            }
         } catch (Exception e) {
             throw new DataException("Data exception: " + e.getMessage(), e);
         }
     }
-
 }
