@@ -1,4 +1,4 @@
-package com.sfr.data.service;
+package com.sfr.data.network.service;
 
 import com.sfr.data.network.api.number.NumberApi;
 import com.sfr.data.network.service.number.NumberRemoteServiceIntImpl;
