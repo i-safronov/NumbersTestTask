@@ -5,7 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.sfr.data.local.sql.db.model.UserNumberHistoryEntity;
+import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 
 import java.util.List;
 
@@ -15,9 +15,12 @@ import kotlinx.coroutines.flow.Flow;
 public interface UserNumberHistoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertNewUserNumber(UserNumberHistoryEntity userNumberHistoryEntity);
+    void saveUserNumberHistory(UserNumberHistoryEntity userNumberHistoryEntity);
 
     @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE")
-    Flow<List<UserNumberHistoryEntity>> getListOfUserNumberHistory();
+    Flow<List<UserNumberHistoryEntity>> getUserNumbersHistory();
+
+    @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE primaryKey=:primaryKey")
+    UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(int primaryKey);
 
 }

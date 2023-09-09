@@ -1,4 +1,4 @@
-package com.sfr.data.local.sql.db.model;
+package com.sfr.data.local.sql.dao.db.model;
 
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
