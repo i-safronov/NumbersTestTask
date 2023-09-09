@@ -51,4 +51,5 @@ public class NumberRemoteServiceIntImpl implements NumberRemoteServiceInt {
             throw new DataException("Data exception: " + e.getMessage(), e);
         }
     }
+
 }
