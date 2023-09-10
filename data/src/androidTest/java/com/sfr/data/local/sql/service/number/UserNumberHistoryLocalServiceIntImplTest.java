@@ -37,7 +37,7 @@ public class UserNumberHistoryLocalServiceIntImplTest {
     }
 
     @After
-    public void after() throws IOException {
+    public void after() throws RuntimeException {
         userNumberHistoryDB.close();
     }
 
@@ -55,7 +55,6 @@ public class UserNumberHistoryLocalServiceIntImplTest {
 
     @Test
     public void saveLotsOfUserNumbersAndReadItFromDb_shouldWriteAndReadWithoutException() throws RuntimeException {
-        //TODO complete code!
         UserNumberHistoryEntity userNumberHistoryEntity1 = new UserNumberHistoryEntity("13", " - is very good number", null);
         UserNumberHistoryEntity userNumberHistoryEntity2 = new UserNumberHistoryEntity("14", " - is very good number", null);
         UserNumberHistoryEntity userNumberHistoryEntity3 = new UserNumberHistoryEntity("15", " - is very good number", null);

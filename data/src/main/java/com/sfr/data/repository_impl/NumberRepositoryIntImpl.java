@@ -3,6 +3,7 @@ package com.sfr.data.repository_impl;
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
 import com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceInt;
+import com.sfr.data.network.service.number.NumberRemoteServiceInt;
 import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
 import com.sfr.domain.model.UserNumberHistory;
@@ -15,23 +16,26 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
 
     private UserNumberHistoryLocalServiceInt userNumberHistoryLocalServiceInt;
     private UserNumberHistoryEntityConverter userNumberHistoryEntityConverter;
+    private NumberRemoteServiceInt numberRemoteServiceInt;
 
     public NumberRepositoryIntImpl(
             UserNumberHistoryLocalServiceInt userNumberHistoryLocalServiceInt,
-            UserNumberHistoryEntityConverter userNumberHistoryEntityConverter
+            UserNumberHistoryEntityConverter userNumberHistoryEntityConverter,
+            NumberRemoteServiceInt numberRemoteServiceInt
     ) {
         this.userNumberHistoryLocalServiceInt = userNumberHistoryLocalServiceInt;
         this.userNumberHistoryEntityConverter = userNumberHistoryEntityConverter;
+        this.numberRemoteServiceInt = numberRemoteServiceInt;
     }
 
     @Override
     public NumberInformationModel getNumberInformation(NumberModel numberModel) {
-        return null;
+        return numberRemoteServiceInt.getNumberInformation(numberModel);
     }
 
     @Override
     public NumberInformationModel getRandomNumberInformation() {
-        return null;
+        return numberRemoteServiceInt.getRandomNumberInformation();
     }
 
     @Override
