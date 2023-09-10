@@ -8,6 +8,6 @@ public interface UserNumberHistoryLocalServiceInt {
 
     Flowable<List<UserNumberHistoryEntity>> getUserNumbersHistory();
     UserNumberHistoryEntity saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory);
-    UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(int primaryKey);
+    UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey);
 
 }

@@ -17,9 +17,9 @@ public class UserNumberHistoryEntity {
     private @Nullable
     String numberInfo;
     @PrimaryKey(autoGenerate = true)
-    private int primaryKey;
+    private Long primaryKey;
 
-    public UserNumberHistoryEntity(@Nullable String number, @Nullable String numberInfo, int primaryKey) {
+    public UserNumberHistoryEntity(@Nullable String number, @Nullable String numberInfo, @Nullable Long primaryKey) {
         this.number = number;
         this.numberInfo = numberInfo;
         this.primaryKey = primaryKey;
@@ -43,11 +43,12 @@ public class UserNumberHistoryEntity {
         this.numberInfo = numberInfo;
     }
 
-    public int getPrimaryKey() {
+    public Long getPrimaryKey() {
         return primaryKey;
     }
 
-    public void setPrimaryKey(int primaryKey) {
+    public void setPrimaryKey(Long primaryKey) {
         this.primaryKey = primaryKey;
     }
+
 }

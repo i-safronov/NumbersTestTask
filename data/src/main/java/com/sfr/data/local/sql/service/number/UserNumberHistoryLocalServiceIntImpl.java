@@ -26,15 +26,15 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     @Override
     public UserNumberHistoryEntity saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory) {
         try {
-            userNumberHistoryDao.saveUserNumberHistory(userNumberHistory);
-            return getUserNumberHistoryByPrimaryKey(userNumberHistory.getPrimaryKey());
+            Long primaryKey = userNumberHistoryDao.saveUserNumberHistory(userNumberHistory);
+            return getUserNumberHistoryByPrimaryKey(primaryKey);
         } catch (Exception e) {
             throw new DataException("Data exception: " + e.getMessage(), e);
         }
     }
 
     @Override
-    public UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(int primaryKey) {
+    public UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey) {
         try {
             return userNumberHistoryDao.getUserNumberHistoryByPrimaryKey(primaryKey);
         } catch (Exception e) {

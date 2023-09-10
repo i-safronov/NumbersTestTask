@@ -4,19 +4,19 @@ public class UserNumberHistory {
 
     private NumberModel numberModel;
     private NumberInformationModel numberInformationModel;
-    private int primaryKey;
+    private Long primaryKey;
 
-    public UserNumberHistory(NumberModel numberModel, NumberInformationModel numberInformationModel, int primaryKey) {
+    public UserNumberHistory(NumberModel numberModel, NumberInformationModel numberInformationModel, Long primaryKey) {
         this.numberModel = numberModel;
         this.numberInformationModel = numberInformationModel;
         this.primaryKey = primaryKey;
     }
 
-    public int getPrimaryKey() {
+    public Long getPrimaryKey() {
         return primaryKey;
     }
 
-    public void setPrimaryKey(int primaryKey) {
+    public void setPrimaryKey(Long primaryKey) {
         this.primaryKey = primaryKey;
     }
 

@@ -13,6 +13,6 @@ public interface NumberRepositoryInt {
 
     Flowable<List<UserNumberHistory>> getUserNumbersHistory();
     UserNumberHistory saveUserNumberHistory(UserNumberHistory userNumberHistory);
-    UserNumberHistory getUserNumberHistoryByPrimaryKey(int primaryKey);
+    UserNumberHistory getUserNumberHistoryByPrimaryKey(Long primaryKey);
 
 }

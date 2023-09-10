@@ -16,7 +16,10 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     private UserNumberHistoryLocalServiceInt userNumberHistoryLocalServiceInt;
     private UserNumberHistoryEntityConverter userNumberHistoryEntityConverter;
 
-    public NumberRepositoryIntImpl(UserNumberHistoryLocalServiceInt userNumberHistoryLocalServiceInt, UserNumberHistoryEntityConverter userNumberHistoryEntityConverter) {
+    public NumberRepositoryIntImpl(
+            UserNumberHistoryLocalServiceInt userNumberHistoryLocalServiceInt,
+            UserNumberHistoryEntityConverter userNumberHistoryEntityConverter
+    ) {
         this.userNumberHistoryLocalServiceInt = userNumberHistoryLocalServiceInt;
         this.userNumberHistoryEntityConverter = userNumberHistoryEntityConverter;
     }
@@ -55,7 +58,7 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     }
 
     @Override
-    public UserNumberHistory getUserNumberHistoryByPrimaryKey(int primaryKey) {
+    public UserNumberHistory getUserNumberHistoryByPrimaryKey(Long primaryKey) {
         return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByPrimaryKey(primaryKey));
     }
 
