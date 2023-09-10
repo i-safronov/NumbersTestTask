@@ -4,10 +4,7 @@ import com.sfr.data.exception.DataException;
 import com.sfr.data.network.api.number.NumberApi;
 import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
-import com.sfr.domain.result.Result;
-
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class NumberRemoteServiceIntImpl implements NumberRemoteServiceInt {
