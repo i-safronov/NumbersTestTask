@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceIntImplTest" tests="2" failures="0" errors="0" skipped="0" time="1.189" timestamp="2023-09-10T01:15:57" hostname="localhost">
+  <properties>
+    <property name="device" value="Redmi 5 - 8.1.0" />
+    <property name="flavor" value="" />
+    <property name="project" value=":data" />
+  </properties>
+  <testcase name="saveUserNumberHistoryAndReadItInList_shouldWriteAndReadDataWithoutException" classname="com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceIntImplTest" time="0.025" />
+  <testcase name="saveLotsOfUserNumbersAndReadItFromDb_shouldWriteAndReadWithoutException" classname="com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceIntImplTest" time="0.03" />
+</testsuite>

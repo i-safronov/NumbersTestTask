@@ -1,0 +1,20 @@
+09-10 06:15:54.595 26452 26476 I TestRunner: started: saveLotsOfUserNumbersAndReadItFromDb_shouldWriteAndReadWithoutException(com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceIntImplTest)
+09-10 06:15:54.606 21711 21711 I DC:test : updateTimerInfoFromService: Timer:(id:-2, duration:1805000, remain:1346739, time:2023-09-10 06:38:21, type:0, state:1, silent:false, bright:true, label:null)
+09-10 06:15:54.606 21711 21711 I DC:formatTime: format: %02d:%02d:%02d
+09-10 06:15:54.607 21711 21711 I DC:formatTime: object: 0
+09-10 06:15:54.607 21711 21711 I DC:formatTime: object: 22
+09-10 06:15:54.607 21711 21711 I DC:formatTime: object: 27
+09-10 06:15:54.607 21711 21711 I DC:formatTime: result: 00:22:27
+09-10 06:15:54.626 21711 21711 I DC:test : updateTimerInfoFromService: Timer:(id:-2, duration:1805000, remain:1346720, time:2023-09-10 06:38:21, type:0, state:1, silent:false, bright:true, label:null)
+09-10 06:15:54.626 21711 21711 I DC:formatTime: format: %02d:%02d:%02d
+09-10 06:15:54.626 21711 21711 I DC:formatTime: object: 0
+09-10 06:15:54.626 21711 21711 I DC:formatTime: object: 22
+09-10 06:15:54.626 21711 21711 I DC:formatTime: object: 27
+09-10 06:15:54.626 21711 21711 I DC:formatTime: result: 00:22:27
+09-10 06:15:54.646 21711 21711 I DC:test : updateTimerInfoFromService: Timer:(id:-2, duration:1805000, remain:1346699, time:2023-09-10 06:38:21, type:0, state:1, silent:false, bright:true, label:null)
+09-10 06:15:54.647 21711 21711 I DC:formatTime: format: %02d:%02d:%02d
+09-10 06:15:54.647 21711 21711 I DC:formatTime: object: 0
+09-10 06:15:54.647 21711 21711 I DC:formatTime: object: 22
+09-10 06:15:54.647 21711 21711 I DC:formatTime: object: 27
+09-10 06:15:54.647 21711 21711 I DC:formatTime: result: 00:22:27
+09-10 06:15:54.648 26452 26476 I TestRunner: finished: saveLotsOfUserNumbersAndReadItFromDb_shouldWriteAndReadWithoutException(com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceIntImplTest)

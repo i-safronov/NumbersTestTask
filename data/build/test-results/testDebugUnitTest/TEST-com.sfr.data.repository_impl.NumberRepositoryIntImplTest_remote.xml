@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.sfr.data.repository_impl.NumberRepositoryIntImplTest_remote" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-09-10T01:30:40" hostname="safronov-desktop" time="0.968">
+  <properties/>
+  <testcase name="getRandomNumberInformationTest" classname="com.sfr.data.repository_impl.NumberRepositoryIntImplTest_remote" time="0.963"/>
+  <testcase name="getNumberInformationTest" classname="com.sfr.data.repository_impl.NumberRepositoryIntImplTest_remote" time="0.005"/>
+  <system-out><![CDATA[
+
+Result is: Result from server
+
+
+Result is: Result from server
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
