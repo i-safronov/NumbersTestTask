@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_page_graph"
+    app:startDestination="@id/fragmentMainPage">
+
+    <fragment
+        android:id="@+id/fragmentMainPage"
+        android:name="com.sfr.numberstesttask.presentation.screen.fragment.main_page.FragmentMainPage"
+        android:label="@string/main"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_fragmentMainPage_to_fragmentNumberDetails"
+            app:destination="@id/fragmentNumberDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentNumberDetails"
+        android:name="com.sfr.numberstesttask.presentation.screen.fragment.number_details.FragmentNumberDetails"
+        android:label="@string/number_details"
+        tools:layout="@layout/fragment_number_details" />
+
+</navigation>

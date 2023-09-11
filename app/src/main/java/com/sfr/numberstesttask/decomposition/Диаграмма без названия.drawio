@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-09-08T12:09:11.527Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.3.7 Chrome/112.0.5615.204 Electron/24.5.0 Safari/537.36" etag="Hy0VMQfed32ldxpJGDsZ" version="21.3.7" type="device">
+<mxfile host="Electron" modified="2023-09-08T13:05:14.803Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.3.7 Chrome/112.0.5615.204 Electron/24.5.0 Safari/537.36" etag="McOxUpoqWPfjnoQQ-VXa" version="21.3.7" type="device">
   <diagram name="Страница 1" id="rKRutEzbssfM5s9uYywh">
-    <mxGraphModel dx="1904" dy="1463" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1647" dy="1308" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -57,7 +57,7 @@
           <mxGeometry x="105" y="37" width="222" height="60" as="geometry" />
         </mxCell>
         <mxCell id="x_J3dZtN8wR6A18b4gdg-15" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="-418" y="-129" width="213" height="147" as="geometry" />
+          <mxGeometry x="-418" y="-129" width="228" height="162" as="geometry" />
         </mxCell>
         <mxCell id="x_J3dZtN8wR6A18b4gdg-16" value="Model&lt;br&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="-413" y="-120" width="60" height="30" as="geometry" />
@@ -85,7 +85,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="x_J3dZtN8wR6A18b4gdg-25" value="GetRundamNumberInformationUseCase" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="x_J3dZtN8wR6A18b4gdg-25" value="GetRandomNumberInformationUseCase" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-129" y="117" width="242" height="60" as="geometry" />
         </mxCell>
         <mxCell id="x_J3dZtN8wR6A18b4gdg-30" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
@@ -105,6 +105,9 @@
         </mxCell>
         <mxCell id="x_J3dZtN8wR6A18b4gdg-35" value="NumberApiRetrofit" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="97" y="-334" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x_J3dZtN8wR6A18b4gdg-38" value="HistoryNumberFact" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-402.5" y="-5" width="137" height="29" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
