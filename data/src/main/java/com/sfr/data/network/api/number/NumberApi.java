@@ -12,7 +12,7 @@ public interface NumberApi {
     @GET
     Call<String> getRandomNumberInformation();
 
-    String MAIN_URL = "http://numbersapi.com/";
-    String URL_TO_GET_RANDOM_NUMBER = "random/math";
+    public static String MAIN_URL = "http://numbersapi.com/";
+    public static String URL_TO_GET_RANDOM_NUMBER = "random/math";
 
 }
