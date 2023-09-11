@@ -10,7 +10,6 @@ import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
-
 import dagger.Module;
 import dagger.Provides;
 
