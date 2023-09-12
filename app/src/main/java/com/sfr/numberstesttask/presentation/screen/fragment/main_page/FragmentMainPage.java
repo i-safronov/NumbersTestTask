@@ -18,7 +18,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sfr.numberstesttask.R;
+import com.sfr.numberstesttask.app.App;
 import com.sfr.numberstesttask.databinding.FragmentMainPageBinding;
+import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModel;
+import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModelProvider;
+
+import javax.inject.Inject;
 
 public class FragmentMainPage extends Fragment {
 
@@ -26,17 +31,28 @@ public class FragmentMainPage extends Fragment {
     private String TAG = "sfrLog";
     private FragmentMainPageBinding binding;
 
+    private FragmentMainPageViewModel fragmentMainPageViewModel;
+    @Inject
+    public FragmentMainPageViewModelProvider fragmentMainPageViewModelProvider;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         binding = FragmentMainPageBinding.inflate(inflater, container, false);
         try {
+            setupViewModel();
             setupView();
         } catch (Exception e) {
             Log.e(TAG, className + " , " + e.getMessage());
+            Toast.makeText(requireContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
         }
         return binding.getRoot();
+    }
+
+    private void setupViewModel() {
+        ((App) requireContext().getApplicationContext()).getAppComponent().inject(FragmentMainPage.this);
+        fragmentMainPageViewModel = fragmentMainPageViewModelProvider.create(FragmentMainPageViewModel.class);
     }
 
     private void setupView() {
