@@ -10,7 +10,7 @@
     Поле для показа информации о числе
 
 Стэк:
-    Java, Retrofit, Room, Navigation Component, RxJava
+    Java, Retrofit, Room, Navigation Component, RxJava, Dagger
 
 Api:
     http://numbersapi.com/1337 - выдает инфу о числе 1337

@@ -41,4 +41,16 @@ public class UserNumberHistory {
         this.numberModel = numberModel;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() != UserNumberHistory.class) return false;
+        UserNumberHistory obj1 = (UserNumberHistory) obj;
+        return numberModel.equals(obj1.getNumberModel()) && numberInformationModel.equals(obj1.getNumberInformationModel()) && primaryKey.equals(obj1.getPrimaryKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
 }

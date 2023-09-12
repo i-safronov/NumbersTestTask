@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground"
+    android:layout_margin="@dimen/margin_normal">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="@integer/max_line_of_title"
+        style="@style/title"
+        tools:text="13" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="@integer/max_line_of_description"
+        style="@style/text"
+        android:ellipsize="end"
+        tools:text="@string/lorem_ipsum"
+        />
+
+</LinearLayout>
