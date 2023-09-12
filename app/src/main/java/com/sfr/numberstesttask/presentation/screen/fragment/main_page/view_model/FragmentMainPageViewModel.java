@@ -68,4 +68,8 @@ public class FragmentMainPageViewModel extends ViewModel {
         return getUserNumbersHistoryUseCase.execute();
     }
 
+    public UserNumberHistory saveUserNumberHistory(UserNumberHistory userNumberHistory) {
+        return saveUserNumberHistoryUseCase.execute(userNumberHistory);
+    }
+
 }

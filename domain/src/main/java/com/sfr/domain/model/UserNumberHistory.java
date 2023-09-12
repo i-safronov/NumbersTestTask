@@ -17,6 +17,11 @@ public class UserNumberHistory {
         this.primaryKey = primaryKey;
     }
 
+    public UserNumberHistory(NumberModel numberModel, NumberInformationModel numberInformationModel) {
+        this.numberModel = numberModel;
+        this.numberInformationModel = numberInformationModel;
+    }
+
     public Long getPrimaryKey() {
         return primaryKey;
     }

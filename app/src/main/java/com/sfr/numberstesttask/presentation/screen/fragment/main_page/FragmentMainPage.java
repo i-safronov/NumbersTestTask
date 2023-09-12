@@ -122,7 +122,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                     Single<NumberInformationModel> numberInformation = fragmentMainPageViewModel.getNumberInformation(new NumberModel(userNumber));
                     numberInformation
                             .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
+                            .observeOn(Schedulers.io())
                             .subscribe(new SingleObserver<NumberInformationModel>() {
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
@@ -131,7 +131,12 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
                                 @Override
                                 public void onSuccess(@NonNull NumberInformationModel numberInformationModel) {
-                                    Toast.makeText(requireContext(), "Result is: " + numberInformationModel.getNumberInfo(), Toast.LENGTH_SHORT).show();
+                                    fragmentMainPageViewModel.saveUserNumberHistory(
+                                            new UserNumberHistory(
+                                                    new NumberModel(numberInformationModel.getNumber()),
+                                                    numberInformationModel
+                                            )
+                                    );
                                 }
 
                                 @Override
@@ -171,7 +176,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
     @Override
     public void onHistoryClick(UserNumberHistory userNumberHistory) {
-
+        //TODO complete method
     }
 
     @Override
