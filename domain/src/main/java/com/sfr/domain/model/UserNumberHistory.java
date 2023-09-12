@@ -1,9 +1,14 @@
 package com.sfr.domain.model;
 
+import io.reactivex.rxjava3.annotations.Nullable;
+
 public class UserNumberHistory {
 
+    @Nullable
     private NumberModel numberModel;
+    @Nullable
     private NumberInformationModel numberInformationModel;
+    @Nullable
     private Long primaryKey;
 
     public UserNumberHistory(NumberModel numberModel, NumberInformationModel numberInformationModel, Long primaryKey) {

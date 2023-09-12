@@ -17,13 +17,25 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sfr.domain.model.NumberInformationModel;
+import com.sfr.domain.model.NumberModel;
+import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.numberstesttask.R;
 import com.sfr.numberstesttask.app.App;
 import com.sfr.numberstesttask.databinding.FragmentMainPageBinding;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModel;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModelProvider;
 
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.core.SingleObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.subscribers.DisposableSubscriber;
 
 public class FragmentMainPage extends Fragment {
 
@@ -63,6 +75,7 @@ public class FragmentMainPage extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try {
+            observeUserNumbersHistory();
             edtvNumberOnTextChangeListener();
             btnGetNumberInfoOnClickListener();
         } catch (Exception e) {
@@ -70,11 +83,57 @@ public class FragmentMainPage extends Fragment {
         }
     }
 
+    private void observeUserNumbersHistory() {
+        fragmentMainPageViewModel.getUserNumbersHistory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableSubscriber<List<UserNumberHistory>>() {
+                    @Override
+                    public void onNext(List<UserNumberHistory> list) {
+                        Log.d(TAG, "On next: " + list.size());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        Log.d(TAG, "On error: " + t.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.d(TAG, "On complete");
+                    }
+                });
+    }
+
     private void btnGetNumberInfoOnClickListener() {
         binding.btnGetNumberInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String userNumber = binding.edtvNumber.getText().toString().trim();
+                if (userNumber.isEmpty()) {
+                    binding.edtvNumber.setError(getString(R.string.write_something));
+                } else {
+                    Single<NumberInformationModel> numberInformation = fragmentMainPageViewModel.getNumberInformation(new NumberModel(userNumber));
+                    numberInformation
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new SingleObserver<NumberInformationModel>() {
+                                @Override
+                                public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
 
+                                }
+
+                                @Override
+                                public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull NumberInformationModel numberInformationModel) {
+                                    Toast.makeText(requireContext(), "Result is: " + numberInformationModel.getNumberInfo(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                    Log.d(TAG, "On error: " + e);
+                                }
+                            });
+                }
             }
         });
     }

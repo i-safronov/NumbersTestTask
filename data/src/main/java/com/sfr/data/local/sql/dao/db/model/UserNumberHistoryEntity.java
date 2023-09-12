@@ -11,13 +11,11 @@ import com.sfr.domain.model.NumberModel;
 public class UserNumberHistoryEntity {
 
     @ColumnInfo
-    private @Nullable
-    String number;
+    private @Nullable String number;
     @ColumnInfo
-    private @Nullable
-    String numberInfo;
+    private @Nullable String numberInfo;
     @PrimaryKey(autoGenerate = true)
-    private Long primaryKey;
+    private @Nullable Long primaryKey;
 
     public UserNumberHistoryEntity(@Nullable String number, @Nullable String numberInfo, @Nullable Long primaryKey) {
         this.number = number;

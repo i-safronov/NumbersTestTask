@@ -2,6 +2,9 @@ package com.sfr.numberstesttask.di.dagger;
 
 import android.content.Context;
 import androidx.room.Room;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.sfr.data.local.sql.dao.db.UserNumberHistoryDB;
 import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
 import com.sfr.data.local.sql.dao.number.UserNumberHistoryDao;
@@ -47,9 +50,12 @@ public class DataModule {
     @Provides
     NumberApi provideNumberApi() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(httpLoggingInterceptor).build();
-        Retrofit builder = new Retrofit.Builder().baseUrl(NumberApi.MAIN_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit builder = new Retrofit.Builder().baseUrl(NumberApi.MAIN_URL).client(okHttpClient).addConverterFactory(GsonConverterFactory.create(gson)).build();
         return builder.create(NumberApi.class);
     }
 

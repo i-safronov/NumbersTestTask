@@ -2,6 +2,7 @@ package com.sfr.data.network.service.number;
 
 import com.sfr.data.exception.DataException;
 import com.sfr.data.network.api.number.NumberApi;
+import com.sfr.data.network.api.number.model.NumberInformationModelResponse;
 import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
 import retrofit2.Call;
@@ -20,11 +21,11 @@ public class NumberRemoteServiceIntImpl implements NumberRemoteServiceInt {
     @Override
     public NumberInformationModel getNumberInformation(NumberModel numberModel) {
         try {
-            Call<String> request = numberApi.getNumberInformation(numberModel.getNumber());
-            Response<String> response = request.execute();
+            Call<NumberInformationModelResponse> request = numberApi.getNumberInformation(numberModel.getNumber());
+            Response<NumberInformationModelResponse> response = request.execute();
             if (response.isSuccessful()) {
                 assert response.body() != null;
-                return new NumberInformationModel(response.body());
+                return new NumberInformationModel(response.body().getText(), response.body().getNumber().toString());
             } else {
                 throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
             }
@@ -36,11 +37,11 @@ public class NumberRemoteServiceIntImpl implements NumberRemoteServiceInt {
     @Override
     public NumberInformationModel getRandomNumberInformation() {
         try {
-            Call<String> request = numberApi.getRandomNumberInformation();
-            Response<String> response = request.execute();
+            Call<NumberInformationModelResponse> request = numberApi.getRandomNumberInformation();
+            Response<NumberInformationModelResponse> response = request.execute();
             if (response.isSuccessful()) {
                 assert response.body() != null;
-                return new NumberInformationModel(response.body());
+                return new NumberInformationModel(response.body().getText(), response.body().getNumber().toString());
             } else {
                 throw new DataException("Response from the server isn't successful: " + response.code(), new IllegalStateException());
             }

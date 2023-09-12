@@ -41,7 +41,7 @@ public class UserNumberHistoryEntityConverter {
     ) {
         return new UserNumberHistory(
                 new NumberModel(userNumberHistory.getNumber()),
-                new NumberInformationModel(userNumberHistory.getNumberInfo()),
+                new NumberInformationModel(userNumberHistory.getNumber(), userNumberHistory.getNumberInfo()),
                 userNumberHistory.getPrimaryKey()
         );
     }
