@@ -15,7 +15,7 @@ public class GetUserNumbersHistoryUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    Flowable<List<UserNumberHistory>> execute() {
+    public Flowable<List<UserNumberHistory>> execute() {
         return numberRepositoryInt.getUserNumbersHistory();
     }
 

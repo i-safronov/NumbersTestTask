@@ -12,7 +12,7 @@ public class GetNumberInformationUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    NumberInformationModel execute(NumberModel numberModel) {
+    public NumberInformationModel execute(NumberModel numberModel) {
         return numberRepositoryInt.getNumberInformation(numberModel);
     }
 

@@ -11,7 +11,7 @@ public class SaveUserNumberHistoryUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    UserNumberHistory execute(UserNumberHistory userNumberHistory) {
+    public UserNumberHistory execute(UserNumberHistory userNumberHistory) {
         return numberRepositoryInt.saveUserNumberHistory(userNumberHistory);
     }
 

@@ -48,13 +48,24 @@ public class FragmentMainPage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         try {
             edtvNumberOnTextChangeListener();
+            btnGetNumberInfoOnClickListener();
         } catch (Exception e) {
             Log.e(TAG, className + " , " + e.getMessage());
         }
     }
 
+    private void btnGetNumberInfoOnClickListener() {
+        binding.btnGetNumberInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+
     private void edtvNumberOnTextChangeListener() {
         binding.edtvNumber.addTextChangedListener(new TextWatcher() {
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -73,6 +84,7 @@ public class FragmentMainPage extends Fragment {
                     binding.btnGetNumberInfo.setEnabled(true);
                 }
             }
+
         });
     }
 

@@ -11,7 +11,7 @@ public class GetUserNumberHistoryByPrimaryKeyUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    UserNumberHistory execute(Long primaryKey) {
+    public UserNumberHistory execute(Long primaryKey) {
         return numberRepositoryInt.getUserNumberHistoryByPrimaryKey(primaryKey);
     }
 

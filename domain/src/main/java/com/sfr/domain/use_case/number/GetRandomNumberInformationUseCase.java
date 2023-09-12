@@ -11,7 +11,7 @@ public class GetRandomNumberInformationUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    NumberInformationModel execute() {
+    public NumberInformationModel execute() {
         return numberRepositoryInt.getRandomNumberInformation();
     }
 
