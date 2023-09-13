@@ -50,14 +50,13 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
     //RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.7'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
 
     //Room:
     def room_version = "2.5.0"
-    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-runtime:2.5.2"
     annotationProcessor "androidx.room:room-compiler:$room_version"
-    // optional - RxJava3 support for Room
-    implementation "androidx.room:room-rxjava3:$room_version"
-
+    implementation "androidx.room:room-rxjava3:2.5.2"
 
 }

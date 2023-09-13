@@ -1,5 +1,7 @@
 package com.sfr.data.repository_impl;
 
+import android.util.Log;
+
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
 import com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceInt;
@@ -10,7 +12,14 @@ import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.domain.repository.NumberRepositoryInt;
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.FlowableEmitter;
+import io.reactivex.rxjava3.core.FlowableOnSubscribe;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Function;
 
 public class NumberRepositoryIntImpl implements NumberRepositoryInt {
 
@@ -39,20 +48,27 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     }
 
     @Override
-    public Flowable<List<UserNumberHistory>> getUserNumbersHistory() {
-        return userNumberHistoryLocalServiceInt.getUserNumbersHistory().flatMap(entityList -> {
-            List<UserNumberHistory> userNumberHistories = new ArrayList<>();
-            for (UserNumberHistoryEntity userNumberHistory: entityList) {
-                userNumberHistories.add(
-                        new UserNumberHistory(
-                                new NumberModel(userNumberHistory.getNumber()),
-                                new NumberInformationModel(userNumberHistory.getNumberInfo(), userNumberHistory.getNumber()),
-                                userNumberHistory.getPrimaryKey()
-                        )
-                );
-            }
-            return Flowable.just(userNumberHistories);
-        });
+    public Observable<List<UserNumberHistory>> getUserNumbersHistory() {
+        //TODO complete code!
+        return userNumberHistoryLocalServiceInt.getUserNumbersHistory().map(
+                new Function<List<UserNumberHistoryEntity>, List<UserNumberHistory>>() {
+                    @Override
+                    public List<UserNumberHistory> apply(List<UserNumberHistoryEntity> userNumberHistoryEntities) throws Throwable {
+                        List<UserNumberHistory> userNumberHistories = new ArrayList<>();
+                        for (UserNumberHistoryEntity userNumberHistory: userNumberHistoryEntities) {
+                            userNumberHistories.add(
+                                    new UserNumberHistory(
+                                            new NumberModel(userNumberHistory.getNumber()),
+                                            new NumberInformationModel(userNumberHistory.getNumberInfo(), userNumberHistory.getNumber()),
+                                            userNumberHistory.getPrimaryKey()
+                                    )
+                            );
+                        }
+                        Log.d("sfrLog", "apply: " + userNumberHistories.size());
+                        return userNumberHistories;
+                    }
+                }
+        );
     }
 
     @Override

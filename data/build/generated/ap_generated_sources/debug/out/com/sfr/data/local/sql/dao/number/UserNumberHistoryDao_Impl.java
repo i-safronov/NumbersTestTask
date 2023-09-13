@@ -9,7 +9,7 @@ import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
-import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 import java.lang.Class;
 import java.lang.Exception;
 import java.lang.Long;
@@ -70,10 +70,10 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
   }
 
   @Override
-  public Flowable<List<UserNumberHistoryEntity>> getUserNumbersHistory() {
+  public Observable<List<UserNumberHistoryEntity>> getUserNumbersHistory() {
     final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
-    return RxRoom.createFlowable(__db, false, new String[]{"USER_NUMBER_HISTORY_TABLE"}, new Callable<List<UserNumberHistoryEntity>>() {
+    return RxRoom.createObservable(__db, false, new String[]{"USER_NUMBER_HISTORY_TABLE"}, new Callable<List<UserNumberHistoryEntity>>() {
       @Override
       public List<UserNumberHistoryEntity> call() throws Exception {
         final Cursor _cursor = DBUtil.query(__db, _statement, false, null);

@@ -8,6 +8,7 @@ import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 
 @Dao
 public interface UserNumberHistoryDao {
@@ -16,7 +17,7 @@ public interface UserNumberHistoryDao {
     Long saveUserNumberHistory(UserNumberHistoryEntity userNumberHistoryEntity);
 
     @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE")
-    Flowable<List<UserNumberHistoryEntity>> getUserNumbersHistory();
+    Observable<List<UserNumberHistoryEntity>> getUserNumbersHistory();
 
     @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE primaryKey=:primaryKey")
     UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey);

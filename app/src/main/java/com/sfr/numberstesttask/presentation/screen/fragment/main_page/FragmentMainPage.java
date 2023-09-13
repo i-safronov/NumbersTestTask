@@ -29,11 +29,15 @@ import com.sfr.numberstesttask.presentation.screen.fragment.main_page.rcv.RcvUse
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModel;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModelProvider;
 
+import org.reactivestreams.Subscription;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.FlowableSubscriber;
+import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -93,20 +97,26 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         fragmentMainPageViewModel.getUserNumbersHistory()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableSubscriber<List<UserNumberHistory>>() {
+                .subscribe(new Observer<List<UserNumberHistory>>() {
                     @Override
-                    public void onNext(List<UserNumberHistory> list) {
-                        rcvUserNumbersHistory.submitList(list);
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                        Log.d(TAG, "onSubscribe: " + d);
                     }
 
                     @Override
-                    public void onError(Throwable t) {
-                        Log.d(TAG, "On error: " + t.getMessage());
+                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull List<UserNumberHistory> list) {
+                        rcvUserNumbersHistory.submitList(list);
+                        Log.d(TAG, "onNext: " + list.size());
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                        Log.d(TAG, "onError: " + e);
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d(TAG, "On complete");
+                        Log.d(TAG, "onComplete");
                     }
                 });
     }
@@ -126,7 +136,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                             .subscribe(new SingleObserver<NumberInformationModel>() {
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
-
+                                    Log.d(TAG, "onSubscribe: single");
                                 }
 
                                 @Override
@@ -137,6 +147,8 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                                                     numberInformationModel
                                             )
                                     );
+                                    observeUserNumbersHistory();
+                                    Log.d(TAG, "saved data: " + numberInformationModel);
                                 }
 
                                 @Override

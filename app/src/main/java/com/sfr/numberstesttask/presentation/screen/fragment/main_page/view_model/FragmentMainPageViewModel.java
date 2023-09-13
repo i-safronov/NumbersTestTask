@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.FlowableEmitter;
 import io.reactivex.rxjava3.core.FlowableOnSubscribe;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleEmitter;
 import io.reactivex.rxjava3.core.SingleOnSubscribe;
@@ -64,7 +65,7 @@ public class FragmentMainPageViewModel extends ViewModel {
         });
     }
 
-    public Flowable<List<UserNumberHistory>> getUserNumbersHistory() {
+    public Observable<List<UserNumberHistory>> getUserNumbersHistory() {
         return getUserNumbersHistoryUseCase.execute();
     }
 
