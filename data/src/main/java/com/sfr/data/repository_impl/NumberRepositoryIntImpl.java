@@ -12,13 +12,9 @@ import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.domain.repository.NumberRepositoryInt;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.annotations.Nullable;
-import io.reactivex.rxjava3.core.BackpressureStrategy;
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.FlowableEmitter;
-import io.reactivex.rxjava3.core.FlowableOnSubscribe;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Function;
 
@@ -86,13 +82,14 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
 
     @Override
     @Nullable
-    public UserNumberHistory getUserNumberHistoryByDetails(String number, String numberInfo) {
-        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number, numberInfo));
+    public UserNumberHistory getUserNumberHistoryByDetails(String number) {
+        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(Objects.requireNonNull(userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number)));
     }
 
     @Override
-    public void deleteUserNumberHistory(UserNumberHistory userNumberHistory) {
-        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntity(userNumberHistoryEntityConverter.convertUserNumberHistoryToUserNumberHistoryEntity(userNumberHistory));
+    public void deleteUserNumberHistoryByDetails(UserNumberHistory userNumberHistory) {
+        UserNumberHistoryEntity userNumberHistoryEntity = userNumberHistoryEntityConverter.convertUserNumberHistoryToUserNumberHistoryEntity(userNumberHistory);
+        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntityByDetails(userNumberHistoryEntity.getNumber());
     }
 
 }

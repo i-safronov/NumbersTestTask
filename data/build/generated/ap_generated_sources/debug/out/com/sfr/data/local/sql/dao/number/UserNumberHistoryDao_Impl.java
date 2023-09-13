@@ -1,10 +1,10 @@
 package com.sfr.data.local.sql.dao.number;
 
 import android.database.Cursor;
-import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
+import androidx.room.SharedSQLiteStatement;
 import androidx.room.rxjava3.RxRoom;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
@@ -28,7 +28,7 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
 
   private final EntityInsertionAdapter<UserNumberHistoryEntity> __insertionAdapterOfUserNumberHistoryEntity;
 
-  private final EntityDeletionOrUpdateAdapter<UserNumberHistoryEntity> __deletionAdapterOfUserNumberHistoryEntity;
+  private final SharedSQLiteStatement __preparedStmtOfDeleteUserNumberHistoryEntityByDetails;
 
   public UserNumberHistoryDao_Impl(RoomDatabase __db) {
     this.__db = __db;
@@ -57,19 +57,11 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
         }
       }
     };
-    this.__deletionAdapterOfUserNumberHistoryEntity = new EntityDeletionOrUpdateAdapter<UserNumberHistoryEntity>(__db) {
+    this.__preparedStmtOfDeleteUserNumberHistoryEntityByDetails = new SharedSQLiteStatement(__db) {
       @Override
       public String createQuery() {
-        return "DELETE FROM `USER_NUMBER_HISTORY_TABLE` WHERE `primaryKey` = ?";
-      }
-
-      @Override
-      public void bind(SupportSQLiteStatement stmt, UserNumberHistoryEntity value) {
-        if (value.getPrimaryKey() == null) {
-          stmt.bindNull(1);
-        } else {
-          stmt.bindLong(1, value.getPrimaryKey());
-        }
+        final String _query = "DELETE FROM USER_NUMBER_HISTORY_TABLE WHERE number=?";
+        return _query;
       }
     };
   }
@@ -88,14 +80,22 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
   }
 
   @Override
-  public void deleteUserNumberHistoryEntity(final UserNumberHistoryEntity userNumberHistoryEntity) {
+  public void deleteUserNumberHistoryEntityByDetails(final String number) {
     __db.assertNotSuspendingTransaction();
+    final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteUserNumberHistoryEntityByDetails.acquire();
+    int _argIndex = 1;
+    if (number == null) {
+      _stmt.bindNull(_argIndex);
+    } else {
+      _stmt.bindString(_argIndex, number);
+    }
     __db.beginTransaction();
     try {
-      __deletionAdapterOfUserNumberHistoryEntity.handle(userNumberHistoryEntity);
+      _stmt.executeUpdateDelete();
       __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
+      __preparedStmtOfDeleteUserNumberHistoryEntityByDetails.release(_stmt);
     }
   }
 
@@ -237,21 +237,14 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
   }
 
   @Override
-  public UserNumberHistoryEntity getUserNumberHistoryByDetails(final String number,
-      final String numberInfo) {
-    final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=? AND numberInfo=?";
-    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+  public UserNumberHistoryEntity getUserNumberHistoryByDetails(final String number) {
+    final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
     int _argIndex = 1;
     if (number == null) {
       _statement.bindNull(_argIndex);
     } else {
       _statement.bindString(_argIndex, number);
-    }
-    _argIndex = 2;
-    if (numberInfo == null) {
-      _statement.bindNull(_argIndex);
-    } else {
-      _statement.bindString(_argIndex, numberInfo);
     }
     __db.assertNotSuspendingTransaction();
     final Cursor _cursor = DBUtil.query(__db, _statement, false, null);

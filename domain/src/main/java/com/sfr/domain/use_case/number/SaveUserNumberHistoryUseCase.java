@@ -7,20 +7,22 @@ public class SaveUserNumberHistoryUseCase {
 
     private NumberRepositoryInt numberRepositoryInt;
     private GetUserNumberHistoryByDetailsUseCase getUserNumberHistoryByDetailsUseCase;
+    private DeleteUserNumberHistoryUseCaseByDetails deleteUserNumberHistoryUseCaseByDetails;
 
-    public SaveUserNumberHistoryUseCase(NumberRepositoryInt numberRepositoryInt /*  GetUserNumberHistoryByDetailsUseCase getUserNumberHistoryByDetailsUseCase */) {
+    public SaveUserNumberHistoryUseCase(NumberRepositoryInt numberRepositoryInt, GetUserNumberHistoryByDetailsUseCase getUserNumberHistoryByDetailsUseCase, DeleteUserNumberHistoryUseCaseByDetails deleteUserNumberHistoryUseCaseByDetails) {
         this.numberRepositoryInt = numberRepositoryInt;
-        //this.getUserNumberHistoryByDetailsUseCase = getUserNumberHistoryByDetailsUseCase;
+        this.getUserNumberHistoryByDetailsUseCase = getUserNumberHistoryByDetailsUseCase;
+        this.deleteUserNumberHistoryUseCaseByDetails = deleteUserNumberHistoryUseCaseByDetails;
     }
 
     public UserNumberHistory execute(UserNumberHistory userNumberHistory) {
-//        UserNumberHistory oldUserNumber = getUserNumberHistoryByDetailsUseCase.execute(userNumberHistory);
-//        if (oldUserNumber == null) {
-//
-//        } else {
-//
-//        }
-        return numberRepositoryInt.saveUserNumberHistory(userNumberHistory);
+        UserNumberHistory oldUserNumber = getUserNumberHistoryByDetailsUseCase.execute(userNumberHistory);
+        if (oldUserNumber == null) {
+            return numberRepositoryInt.saveUserNumberHistory(userNumberHistory);
+        } else {
+            deleteUserNumberHistoryUseCaseByDetails.execute(userNumberHistory);
+            return numberRepositoryInt.saveUserNumberHistory(userNumberHistory);
+        }
     }
 
 }

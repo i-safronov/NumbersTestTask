@@ -16,7 +16,7 @@ public interface NumberRepositoryInt {
     Observable<List<UserNumberHistory>> getUserNumbersHistory();
     UserNumberHistory saveUserNumberHistory(UserNumberHistory userNumberHistory);
     @Nullable UserNumberHistory getUserNumberHistoryByPrimaryKey(Long primaryKey);
-    @Nullable UserNumberHistory getUserNumberHistoryByDetails(String number, String numberInfo);
-    void deleteUserNumberHistory(UserNumberHistory userNumberHistory);
+    @Nullable UserNumberHistory getUserNumberHistoryByDetails(String number);
+    void deleteUserNumberHistoryByDetails(UserNumberHistory userNumberHistory);
 
 }

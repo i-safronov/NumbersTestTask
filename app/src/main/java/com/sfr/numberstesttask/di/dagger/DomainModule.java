@@ -5,8 +5,10 @@ import com.sfr.data.local.sql.service.number.UserNumberHistoryLocalServiceInt;
 import com.sfr.data.network.service.number.NumberRemoteServiceInt;
 import com.sfr.data.repository_impl.NumberRepositoryIntImpl;
 import com.sfr.domain.repository.NumberRepositoryInt;
+import com.sfr.domain.use_case.number.DeleteUserNumberHistoryUseCaseByDetails;
 import com.sfr.domain.use_case.number.GetNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
+import com.sfr.domain.use_case.number.GetUserNumberHistoryByDetailsUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
@@ -56,9 +58,23 @@ public class DomainModule {
     }
 
     @Provides
-    SaveUserNumberHistoryUseCase provideSaveUserNumberHistoryUseCase(NumberRepositoryInt numberRepositoryInt) {
-        return new SaveUserNumberHistoryUseCase(
+    GetUserNumberHistoryByDetailsUseCase provideGetUserNumberHistoryByDetailsUseCase(NumberRepositoryInt numberRepositoryInt) {
+        return new GetUserNumberHistoryByDetailsUseCase(
                 numberRepositoryInt
+        );
+    }
+
+    @Provides
+    DeleteUserNumberHistoryUseCaseByDetails provideDeleteUserNumberHistoryUseCase(NumberRepositoryInt numberRepositoryInt) {
+        return new DeleteUserNumberHistoryUseCaseByDetails(
+                numberRepositoryInt
+        );
+    }
+
+    @Provides
+    SaveUserNumberHistoryUseCase provideSaveUserNumberHistoryUseCase(NumberRepositoryInt numberRepositoryInt, GetUserNumberHistoryByDetailsUseCase getUserNumberHistoryByDetailsUseCase, DeleteUserNumberHistoryUseCaseByDetails deleteUserNumberHistoryUseCaseByDetails) {
+        return new SaveUserNumberHistoryUseCase(
+                numberRepositoryInt, getUserNumberHistoryByDetailsUseCase, deleteUserNumberHistoryUseCaseByDetails
         );
     }
 

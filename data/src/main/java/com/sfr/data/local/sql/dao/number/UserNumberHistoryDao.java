@@ -1,11 +1,9 @@
 package com.sfr.data.local.sql.dao.number;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 
@@ -31,11 +29,11 @@ public interface UserNumberHistoryDao {
     @Nullable
     UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey);
 
-    @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=:number AND numberInfo=:numberInfo")
+    @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=:number")
     @Nullable
-    UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo);
+    UserNumberHistoryEntity getUserNumberHistoryByDetails(String number);
 
-    @Delete
-    void deleteUserNumberHistoryEntity(UserNumberHistoryEntity userNumberHistoryEntity);
+    @Query("DELETE FROM USER_NUMBER_HISTORY_TABLE WHERE number=:number")
+    void deleteUserNumberHistoryEntityByDetails(String number);
 
 }

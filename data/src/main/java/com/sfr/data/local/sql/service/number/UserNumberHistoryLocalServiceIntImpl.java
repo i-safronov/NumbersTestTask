@@ -52,13 +52,13 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
 
     @Override
     @Nullable
-    public UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo) {
-        return userNumberHistoryDao.getUserNumberHistoryByDetails(number, numberInfo);
+    public UserNumberHistoryEntity getUserNumberHistoryByDetails(String number) {
+        return userNumberHistoryDao.getUserNumberHistoryByDetails(number);
     }
 
     @Override
-    public void deleteUserNumberHistoryEntity(UserNumberHistoryEntity userNumberHistoryEntity) {
-        userNumberHistoryDao.deleteUserNumberHistoryEntity(userNumberHistoryEntity);
+    public void deleteUserNumberHistoryEntityByDetails(String number) {
+        userNumberHistoryDao.deleteUserNumberHistoryEntityByDetails(number);
     }
 
 }

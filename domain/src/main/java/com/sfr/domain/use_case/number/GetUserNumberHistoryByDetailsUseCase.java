@@ -14,7 +14,12 @@ public class GetUserNumberHistoryByDetailsUseCase {
     }
 
     @Nullable UserNumberHistory execute(UserNumberHistory userNumberHistory) {
-        return numberRepositoryInt.getUserNumberHistoryByDetails(userNumberHistory.getNumberModel().getNumber(), userNumberHistory.getNumberInformationModel().getNumberInfo());
+        try {
+            return numberRepositoryInt.getUserNumberHistoryByDetails(userNumberHistory.getNumberModel().getNumber());
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return null;
+        }
     }
 
 }

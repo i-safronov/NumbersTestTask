@@ -5,7 +5,7 @@ import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import io.reactivex.rxjava3.core.Flowable;
+
 import io.reactivex.rxjava3.core.Observable;
 
 public interface UserNumberHistoryLocalServiceInt {
@@ -16,7 +16,7 @@ public interface UserNumberHistoryLocalServiceInt {
     UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey);
     List<UserNumberHistoryEntity> getUserNumbersHistoryAsList();
     @Nullable
-    UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo);
-    void deleteUserNumberHistoryEntity(UserNumberHistoryEntity userNumberHistoryEntity);
+    UserNumberHistoryEntity getUserNumberHistoryByDetails(String number);
+    void deleteUserNumberHistoryEntityByDetails(String number);
 
 }

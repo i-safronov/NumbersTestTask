@@ -122,6 +122,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         binding.btnGetNumberInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String userNumber = binding.edtvNumber.getText().toString().trim();
                 if (userNumber.isEmpty()) {
                     binding.edtvNumber.setError(getString(R.string.write_something));
@@ -138,13 +139,17 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
                                 @Override
                                 public void onSuccess(@NonNull NumberInformationModel numberInformationModel) {
-                                    fragmentMainPageViewModel.saveUserNumberHistory(
-                                            new UserNumberHistory(
-                                                    new NumberModel(numberInformationModel.getNumber()),
-                                                    numberInformationModel
-                                            )
-                                    );
-                                    observeUserNumbersHistory();
+                                    try {
+                                        fragmentMainPageViewModel.saveUserNumberHistory(
+                                                new UserNumberHistory(
+                                                        new NumberModel(numberInformationModel.getNumber()),
+                                                        numberInformationModel
+                                                )
+                                        );
+                                        observeUserNumbersHistory();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
 
                                 @Override
@@ -153,6 +158,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                                 }
                             });
                 }
+
             }
         });
     }

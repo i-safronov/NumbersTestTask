@@ -1,7 +1,6 @@
 package com.sfr.data.local.sql.service.number;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
@@ -15,11 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
-import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.subscribers.TestSubscriber;
 
 @RunWith(AndroidJUnit4.class)
 public class UserNumberHistoryLocalServiceIntImplTest {
@@ -80,7 +76,7 @@ public class UserNumberHistoryLocalServiceIntImplTest {
                 userNumberHistoryEntity
         );
         UserNumberHistoryEntity userNumberHistoryEntity2 = userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(
-                userNumberHistoryEntity1.getNumber(), userNumberHistoryEntity1.getNumberInfo()
+                userNumberHistoryEntity1.getNumber()
         );
         System.out.println("\n\n\n data is: " + userNumberHistoryEntity2.getNumber() + ", " + userNumberHistoryEntity1.getNumber() + "\n\n\n");
         assert userNumberHistoryEntity1.getNumber() != null;
@@ -90,14 +86,14 @@ public class UserNumberHistoryLocalServiceIntImplTest {
     }
 
     @Test
-    public void deleteUserNumberHistoryEntity_shouldDeleteItemWithoutException() throws RuntimeException {
+    public void deleteUserNumberHistoryEntityByDetails_shouldDeleteItemWithoutException() throws RuntimeException {
         UserNumberHistoryEntity userNumberHistoryEntity = new UserNumberHistoryEntity("13", " - is very good number", null);
         UserNumberHistoryEntity userNumberHistoryEntity1 = userNumberHistoryLocalServiceInt.saveUserNumberHistory(
                 userNumberHistoryEntity
         );
         List<UserNumberHistoryEntity> list = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
         assert !list.isEmpty();
-        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntity(userNumberHistoryEntity1);
+        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntityByDetails(userNumberHistoryEntity1.getNumber());
         List<UserNumberHistoryEntity> listNew = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
         assert listNew.isEmpty();
     }
