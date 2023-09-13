@@ -1,8 +1,10 @@
 package com.sfr.domain.model;
 
+import java.io.Serializable;
+
 import io.reactivex.rxjava3.annotations.Nullable;
 
-public class NumberInformationModel {
+public class NumberInformationModel implements Serializable {
 
     private @Nullable String numberInfo;
     private @Nullable String number;

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
 import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
 import com.sfr.domain.model.UserNumberHistory;
@@ -28,6 +30,7 @@ import com.sfr.numberstesttask.presentation.screen.fragment.main_page.rcv.RcvUse
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.rcv.RcvUserNumbersHistoryInt;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModel;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModelProvider;
+import com.sfr.numberstesttask.presentation.screen.fragment.number_details.FragmentNumberDetails;
 
 import org.reactivestreams.Subscription;
 
@@ -57,12 +60,16 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
     public FragmentMainPageViewModelProvider fragmentMainPageViewModelProvider;
     private FragmentMainPageViewModel fragmentMainPageViewModel;
 
+    @Inject
+    public UserNumberHistoryEntityConverter userNumberHistoryEntityConverter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         binding = FragmentMainPageBinding.inflate(inflater, container, false);
         try {
+            init();
             setupViewModel();
             setupView();
         } catch (Exception e) {
@@ -72,8 +79,11 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         return binding.getRoot();
     }
 
-    private void setupViewModel() {
+    private void init() {
         ((App) requireContext().getApplicationContext()).getAppComponent().inject(FragmentMainPage.this);
+    }
+
+    private void setupViewModel() {
         fragmentMainPageViewModel = fragmentMainPageViewModelProvider.create(FragmentMainPageViewModel.class);
     }
 
@@ -190,7 +200,17 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
     @Override
     public void onHistoryClick(UserNumberHistory userNumberHistory) {
-        //TODO complete method
+        goToTheFragmentNumberDetails(userNumberHistory);
+    }
+
+    private void goToTheFragmentNumberDetails(UserNumberHistory userNumberHistory) {
+        NumberInformationModel numberInformationModel = userNumberHistoryEntityConverter.convertUserNumberHistoryToNumberInformationModel(userNumberHistory);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(FragmentNumberDetails.CURRENT_NUMBER_INFORMATION_MODEL, numberInformationModel);
+        NavHostFragment.findNavController(FragmentMainPage.this).navigate(
+                R.id.action_fragmentMainPage_to_fragmentNumberDetails,
+                bundle
+        );
     }
 
     @Override

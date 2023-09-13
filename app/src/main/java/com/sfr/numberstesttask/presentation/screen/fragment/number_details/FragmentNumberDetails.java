@@ -2,65 +2,75 @@ package com.sfr.numberstesttask.presentation.screen.fragment.number_details;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
+import com.sfr.domain.model.NumberInformationModel;
+import com.sfr.domain.model.NumberModel;
 import com.sfr.numberstesttask.R;
+import com.sfr.numberstesttask.app.App;
+import com.sfr.numberstesttask.databinding.FragmentNumberDetailsBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentNumberDetails#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.jetbrains.annotations.Nullable;
+
+import javax.inject.Inject;
+
 public class FragmentNumberDetails extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentNumberDetails() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentNumberDetails.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentNumberDetails newInstance(String param1, String param2) {
-        FragmentNumberDetails fragment = new FragmentNumberDetails();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private String TAG = "sfrLog";
+    private String className = FragmentNumberDetails.this.getClass().getName();
+    private NumberInformationModel numberInformationModel;
+    private FragmentNumberDetailsBinding binding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_number_details, container, false);
+        binding = FragmentNumberDetailsBinding.inflate(inflater, container, false);
+        try {
+            init();
+        } catch (Exception e) {
+            Log.e(TAG, className + ", " + e.getMessage());
+        }
+        return binding.getRoot();
     }
+
+    private void init() {
+        numberInformationModel = getArgsAsNumberInformationModel();
+    }
+
+    private NumberInformationModel getArgsAsNumberInformationModel() {
+        return (NumberInformationModel) requireArguments().getSerializable(CURRENT_NUMBER_INFORMATION_MODEL);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @androidx.annotation.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        try {
+            setupView();
+        } catch (Exception e) {
+            Log.e(TAG, className + ", " + e.getMessage());
+        }
+    }
+
+    private void setupView() {
+        binding.tvNumber.setText(numberInformationModel.getNumber());
+        binding.tvNumberInfo.setText(numberInformationModel.getNumberInfo());
+    }
+
+    @Override
+    public void onDestroyView() {
+        binding = null;
+        super.onDestroyView();
+    }
+
+    public static String CURRENT_NUMBER_INFORMATION_MODEL = "Current number information model";
+
 }

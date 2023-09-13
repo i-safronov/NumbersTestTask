@@ -46,4 +46,13 @@ public class UserNumberHistoryEntityConverter {
         );
     }
 
+    public NumberInformationModel convertUserNumberHistoryToNumberInformationModel(
+            UserNumberHistory userNumberHistory
+    ) {
+        return new NumberInformationModel(
+                userNumberHistory.getNumberInformationModel().getNumberInfo(),
+                userNumberHistory.getNumberInformationModel().getNumber()
+        );
+    }
+
 }
