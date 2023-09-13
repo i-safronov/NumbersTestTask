@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.annotations.Nullable;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.FlowableEmitter;
@@ -78,13 +79,20 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     }
 
     @Override
+    @Nullable
     public UserNumberHistory getUserNumberHistoryByPrimaryKey(Long primaryKey) {
         return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByPrimaryKey(primaryKey));
     }
 
     @Override
+    @Nullable
     public UserNumberHistory getUserNumberHistoryByDetails(String number, String numberInfo) {
         return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number, numberInfo));
+    }
+
+    @Override
+    public void deleteUserNumberHistory(UserNumberHistory userNumberHistory) {
+        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntity(userNumberHistoryEntityConverter.convertUserNumberHistoryToUserNumberHistoryEntity(userNumberHistory));
     }
 
 }

@@ -89,4 +89,17 @@ public class UserNumberHistoryLocalServiceIntImplTest {
         Assert.assertTrue(userNumberHistoryEntity1.getNumberInfo().equals(userNumberHistoryEntity2.getNumberInfo()));
     }
 
+    @Test
+    public void deleteUserNumberHistoryEntity_shouldDeleteItemWithoutException() throws RuntimeException {
+        UserNumberHistoryEntity userNumberHistoryEntity = new UserNumberHistoryEntity("13", " - is very good number", null);
+        UserNumberHistoryEntity userNumberHistoryEntity1 = userNumberHistoryLocalServiceInt.saveUserNumberHistory(
+                userNumberHistoryEntity
+        );
+        List<UserNumberHistoryEntity> list = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
+        assert !list.isEmpty();
+        userNumberHistoryLocalServiceInt.deleteUserNumberHistoryEntity(userNumberHistoryEntity1);
+        List<UserNumberHistoryEntity> listNew = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
+        assert listNew.isEmpty();
+    }
+
 }

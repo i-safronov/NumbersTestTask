@@ -1,6 +1,7 @@
 package com.sfr.data.local.sql.dao.number;
 
 import android.database.Cursor;
+import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
 import androidx.room.RoomDatabase;
 import androidx.room.RoomSQLiteQuery;
@@ -26,6 +27,8 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
   private final RoomDatabase __db;
 
   private final EntityInsertionAdapter<UserNumberHistoryEntity> __insertionAdapterOfUserNumberHistoryEntity;
+
+  private final EntityDeletionOrUpdateAdapter<UserNumberHistoryEntity> __deletionAdapterOfUserNumberHistoryEntity;
 
   public UserNumberHistoryDao_Impl(RoomDatabase __db) {
     this.__db = __db;
@@ -54,6 +57,21 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
         }
       }
     };
+    this.__deletionAdapterOfUserNumberHistoryEntity = new EntityDeletionOrUpdateAdapter<UserNumberHistoryEntity>(__db) {
+      @Override
+      public String createQuery() {
+        return "DELETE FROM `USER_NUMBER_HISTORY_TABLE` WHERE `primaryKey` = ?";
+      }
+
+      @Override
+      public void bind(SupportSQLiteStatement stmt, UserNumberHistoryEntity value) {
+        if (value.getPrimaryKey() == null) {
+          stmt.bindNull(1);
+        } else {
+          stmt.bindLong(1, value.getPrimaryKey());
+        }
+      }
+    };
   }
 
   @Override
@@ -64,6 +82,18 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
       long _result = __insertionAdapterOfUserNumberHistoryEntity.insertAndReturnId(userNumberHistoryEntity);
       __db.setTransactionSuccessful();
       return _result;
+    } finally {
+      __db.endTransaction();
+    }
+  }
+
+  @Override
+  public void deleteUserNumberHistoryEntity(final UserNumberHistoryEntity userNumberHistoryEntity) {
+    __db.assertNotSuspendingTransaction();
+    __db.beginTransaction();
+    try {
+      __deletionAdapterOfUserNumberHistoryEntity.handle(userNumberHistoryEntity);
+      __db.setTransactionSuccessful();
     } finally {
       __db.endTransaction();
     }

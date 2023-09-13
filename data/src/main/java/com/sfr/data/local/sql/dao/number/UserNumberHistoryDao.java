@@ -1,6 +1,7 @@
 package com.sfr.data.local.sql.dao.number;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -33,5 +34,8 @@ public interface UserNumberHistoryDao {
     @Query("SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=:number AND numberInfo=:numberInfo")
     @Nullable
     UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo);
+
+    @Delete
+    void deleteUserNumberHistoryEntity(UserNumberHistoryEntity userNumberHistoryEntity);
 
 }

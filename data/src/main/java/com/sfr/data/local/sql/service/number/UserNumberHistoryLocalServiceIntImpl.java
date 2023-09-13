@@ -4,6 +4,8 @@ import com.sfr.data.exception.DataException;
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import com.sfr.data.local.sql.dao.number.UserNumberHistoryDao;
 import java.util.List;
+
+import io.reactivex.rxjava3.annotations.Nullable;
 import io.reactivex.rxjava3.core.Observable;
 
 public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLocalServiceInt {
@@ -34,6 +36,7 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
+    @Nullable
     public UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey) {
         try {
             return userNumberHistoryDao.getUserNumberHistoryByPrimaryKey(primaryKey);
@@ -48,8 +51,14 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
+    @Nullable
     public UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo) {
         return userNumberHistoryDao.getUserNumberHistoryByDetails(number, numberInfo);
+    }
+
+    @Override
+    public void deleteUserNumberHistoryEntity(UserNumberHistoryEntity userNumberHistoryEntity) {
+        userNumberHistoryDao.deleteUserNumberHistoryEntity(userNumberHistoryEntity);
     }
 
 }
