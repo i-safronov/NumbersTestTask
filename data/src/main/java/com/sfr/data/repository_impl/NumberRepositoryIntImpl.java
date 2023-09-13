@@ -82,4 +82,9 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
         return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByPrimaryKey(primaryKey));
     }
 
+    @Override
+    public UserNumberHistory getUserNumberHistoryByDetails(String number, String numberInfo) {
+        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number, numberInfo));
+    }
+
 }

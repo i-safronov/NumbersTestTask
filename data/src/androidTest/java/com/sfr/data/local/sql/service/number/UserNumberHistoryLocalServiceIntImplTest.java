@@ -73,4 +73,20 @@ public class UserNumberHistoryLocalServiceIntImplTest {
         Assert.assertEquals(userNumberHistoryEntity3.getNumber(), userNumberHistoryEntityR3.getNumber());
     }
 
+    @Test
+    public void getUserNumberHistoryByDetails_shouldReturnItemWithoutException() throws RuntimeException {
+        UserNumberHistoryEntity userNumberHistoryEntity = new UserNumberHistoryEntity("13", " - is very good number", null);
+        UserNumberHistoryEntity userNumberHistoryEntity1 = userNumberHistoryLocalServiceInt.saveUserNumberHistory(
+                userNumberHistoryEntity
+        );
+        UserNumberHistoryEntity userNumberHistoryEntity2 = userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(
+                userNumberHistoryEntity1.getNumber(), userNumberHistoryEntity1.getNumberInfo()
+        );
+        System.out.println("\n\n\n data is: " + userNumberHistoryEntity2.getNumber() + ", " + userNumberHistoryEntity1.getNumber() + "\n\n\n");
+        assert userNumberHistoryEntity1.getNumber() != null;
+        assert userNumberHistoryEntity1.getNumberInfo() != null;
+        Assert.assertTrue(userNumberHistoryEntity1.getNumber().equals(userNumberHistoryEntity2.getNumber()));
+        Assert.assertTrue(userNumberHistoryEntity1.getNumberInfo().equals(userNumberHistoryEntity2.getNumberInfo()));
+    }
+
 }

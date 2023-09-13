@@ -1,8 +1,10 @@
 package com.sfr.domain.model;
 
+import io.reactivex.rxjava3.annotations.Nullable;
+
 public class NumberModel {
 
-    private String number;
+    private @Nullable String number;
 
     public NumberModel(String number) {
         this.number = number;

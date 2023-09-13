@@ -12,6 +12,7 @@ public class SaveUserNumberHistoryUseCase {
     }
 
     public UserNumberHistory execute(UserNumberHistory userNumberHistory) {
+
         return numberRepositoryInt.saveUserNumberHistory(userNumberHistory);
     }
 

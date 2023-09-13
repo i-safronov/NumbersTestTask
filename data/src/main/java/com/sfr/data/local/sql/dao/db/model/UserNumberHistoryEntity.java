@@ -1,19 +1,20 @@
 package com.sfr.data.local.sql.dao.db.model;
 
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import com.sfr.domain.model.NumberInformationModel;
-import com.sfr.domain.model.NumberModel;
+
+import org.jetbrains.annotations.Nullable;
 
 @Entity(tableName = "USER_NUMBER_HISTORY_TABLE")
 public class UserNumberHistoryEntity {
 
     @ColumnInfo
-    private @Nullable String number;
+    private @Nullable
+    String number;
     @ColumnInfo
-    private @Nullable String numberInfo;
+    private @Nullable
+    String numberInfo;
     @PrimaryKey(autoGenerate = true)
     private @Nullable Long primaryKey;
 

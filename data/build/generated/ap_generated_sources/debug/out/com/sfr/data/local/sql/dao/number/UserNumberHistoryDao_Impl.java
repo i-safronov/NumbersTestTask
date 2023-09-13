@@ -119,6 +119,47 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
   }
 
   @Override
+  public List<UserNumberHistoryEntity> getUserNumbersHistoryAsList() {
+    final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "number");
+      final int _cursorIndexOfNumberInfo = CursorUtil.getColumnIndexOrThrow(_cursor, "numberInfo");
+      final int _cursorIndexOfPrimaryKey = CursorUtil.getColumnIndexOrThrow(_cursor, "primaryKey");
+      final List<UserNumberHistoryEntity> _result = new ArrayList<UserNumberHistoryEntity>(_cursor.getCount());
+      while(_cursor.moveToNext()) {
+        final UserNumberHistoryEntity _item;
+        final String _tmpNumber;
+        if (_cursor.isNull(_cursorIndexOfNumber)) {
+          _tmpNumber = null;
+        } else {
+          _tmpNumber = _cursor.getString(_cursorIndexOfNumber);
+        }
+        final String _tmpNumberInfo;
+        if (_cursor.isNull(_cursorIndexOfNumberInfo)) {
+          _tmpNumberInfo = null;
+        } else {
+          _tmpNumberInfo = _cursor.getString(_cursorIndexOfNumberInfo);
+        }
+        final Long _tmpPrimaryKey;
+        if (_cursor.isNull(_cursorIndexOfPrimaryKey)) {
+          _tmpPrimaryKey = null;
+        } else {
+          _tmpPrimaryKey = _cursor.getLong(_cursorIndexOfPrimaryKey);
+        }
+        _item = new UserNumberHistoryEntity(_tmpNumber,_tmpNumberInfo,_tmpPrimaryKey);
+        _result.add(_item);
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
   public UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(final Long primaryKey) {
     final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE primaryKey=?";
     final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
@@ -127,6 +168,60 @@ public final class UserNumberHistoryDao_Impl implements UserNumberHistoryDao {
       _statement.bindNull(_argIndex);
     } else {
       _statement.bindLong(_argIndex, primaryKey);
+    }
+    __db.assertNotSuspendingTransaction();
+    final Cursor _cursor = DBUtil.query(__db, _statement, false, null);
+    try {
+      final int _cursorIndexOfNumber = CursorUtil.getColumnIndexOrThrow(_cursor, "number");
+      final int _cursorIndexOfNumberInfo = CursorUtil.getColumnIndexOrThrow(_cursor, "numberInfo");
+      final int _cursorIndexOfPrimaryKey = CursorUtil.getColumnIndexOrThrow(_cursor, "primaryKey");
+      final UserNumberHistoryEntity _result;
+      if(_cursor.moveToFirst()) {
+        final String _tmpNumber;
+        if (_cursor.isNull(_cursorIndexOfNumber)) {
+          _tmpNumber = null;
+        } else {
+          _tmpNumber = _cursor.getString(_cursorIndexOfNumber);
+        }
+        final String _tmpNumberInfo;
+        if (_cursor.isNull(_cursorIndexOfNumberInfo)) {
+          _tmpNumberInfo = null;
+        } else {
+          _tmpNumberInfo = _cursor.getString(_cursorIndexOfNumberInfo);
+        }
+        final Long _tmpPrimaryKey;
+        if (_cursor.isNull(_cursorIndexOfPrimaryKey)) {
+          _tmpPrimaryKey = null;
+        } else {
+          _tmpPrimaryKey = _cursor.getLong(_cursorIndexOfPrimaryKey);
+        }
+        _result = new UserNumberHistoryEntity(_tmpNumber,_tmpNumberInfo,_tmpPrimaryKey);
+      } else {
+        _result = null;
+      }
+      return _result;
+    } finally {
+      _cursor.close();
+      _statement.release();
+    }
+  }
+
+  @Override
+  public UserNumberHistoryEntity getUserNumberHistoryByDetails(final String number,
+      final String numberInfo) {
+    final String _sql = "SELECT * FROM USER_NUMBER_HISTORY_TABLE WHERE number=? AND numberInfo=?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 2);
+    int _argIndex = 1;
+    if (number == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, number);
+    }
+    _argIndex = 2;
+    if (numberInfo == null) {
+      _statement.bindNull(_argIndex);
+    } else {
+      _statement.bindString(_argIndex, numberInfo);
     }
     __db.assertNotSuspendingTransaction();
     final Cursor _cursor = DBUtil.query(__db, _statement, false, null);

@@ -1,9 +1,11 @@
 package com.sfr.domain.model;
 
+import io.reactivex.rxjava3.annotations.Nullable;
+
 public class NumberInformationModel {
 
-    private String numberInfo;
-    private String number;
+    private @Nullable String numberInfo;
+    private @Nullable String number;
 
     public NumberInformationModel(String numberInfo, String number) {
         this.numberInfo = numberInfo;

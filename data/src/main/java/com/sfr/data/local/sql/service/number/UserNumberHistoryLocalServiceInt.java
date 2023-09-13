@@ -10,5 +10,7 @@ public interface UserNumberHistoryLocalServiceInt {
     Observable<List<UserNumberHistoryEntity>> getUserNumbersHistory();
     UserNumberHistoryEntity saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory);
     UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey);
+    List<UserNumberHistoryEntity> getUserNumbersHistoryAsList();
+    UserNumberHistoryEntity getUserNumberHistoryByDetails(String number, String numberInfo);
 
 }
