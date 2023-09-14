@@ -105,4 +105,16 @@ public class UserNumberHistoryLocalServiceIntImplTest {
         assert listNew.isEmpty();
     }
 
+    @Test
+    public void getUserNumbersHistoryAsList_shouldReturnListWithoutException() {
+        UserNumberHistoryEntity userNumberHistoryEntity = new UserNumberHistoryEntity("13", " - is very good number", null);
+        List<UserNumberHistoryEntity> list = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
+        assert list.isEmpty();
+        Optional<UserNumberHistoryEntity> userNumberHistoryEntity1 = userNumberHistoryLocalServiceInt.saveUserNumberHistory(
+                userNumberHistoryEntity
+        );
+        List<UserNumberHistoryEntity> list1 = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
+        assert !list1.isEmpty();
+    }
+
 }

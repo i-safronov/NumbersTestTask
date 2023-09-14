@@ -28,6 +28,25 @@ public class UserNumberHistoryEntityConverter {
         return mList;
     }
 
+    public List<UserNumberHistory> convertListOfUserNumberHistoryEntityToListOfUserNumberHistory(
+            List<UserNumberHistoryEntity> list
+    ) {
+        ArrayList<UserNumberHistory> mList = new ArrayList<>();
+        for (UserNumberHistoryEntity userNumberHistoryEntity: list) {
+            mList.add(
+                    new UserNumberHistory(
+                            new NumberModel(userNumberHistoryEntity.getNumber()),
+                            new NumberInformationModel(
+                                    userNumberHistoryEntity.getNumberInfo(),
+                                    userNumberHistoryEntity.getNumber()
+                            ),
+                            userNumberHistoryEntity.getPrimaryKey()
+                    )
+            );
+        }
+        return mList;
+    }
+
     public UserNumberHistoryEntity convertUserNumberHistoryToUserNumberHistoryEntity(
             UserNumberHistory userNumberHistory
     ) {

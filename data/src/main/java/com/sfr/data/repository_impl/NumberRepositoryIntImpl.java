@@ -70,6 +70,12 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     }
 
     @Override
+    public List<UserNumberHistory> getUserNumbersHistoryAsList() {
+        List<UserNumberHistoryEntity> userNumbersHistoryAsList = userNumberHistoryLocalServiceInt.getUserNumbersHistoryAsList();
+        return userNumberHistoryEntityConverter.convertListOfUserNumberHistoryEntityToListOfUserNumberHistory(userNumbersHistoryAsList);
+    }
+
+    @Override
     public Optional<UserNumberHistory> saveUserNumberHistory(UserNumberHistory userNumberHistory) {
         UserNumberHistoryEntity entity = userNumberHistoryEntityConverter.convertUserNumberHistoryToUserNumberHistoryEntity(userNumberHistory);
         Optional<UserNumberHistoryEntity> userNumberHistoryEntity = userNumberHistoryLocalServiceInt.saveUserNumberHistory(entity);

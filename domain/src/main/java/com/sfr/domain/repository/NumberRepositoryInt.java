@@ -15,6 +15,7 @@ public interface NumberRepositoryInt {
     NumberInformationModel getRandomNumberInformation();
 
     Observable<List<UserNumberHistory>> getUserNumbersHistory();
+    List<UserNumberHistory> getUserNumbersHistoryAsList();
     Optional<UserNumberHistory> saveUserNumberHistory(UserNumberHistory userNumberHistory);
     Optional<UserNumberHistory> getUserNumberHistoryByPrimaryKey(Long primaryKey);
     Optional<UserNumberHistory> getUserNumberHistoryByDetails(String number);
