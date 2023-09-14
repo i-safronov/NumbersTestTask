@@ -13,6 +13,7 @@ import com.sfr.domain.repository.NumberRepositoryInt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import io.reactivex.rxjava3.annotations.Nullable;
 import io.reactivex.rxjava3.core.Observable;
@@ -69,21 +70,39 @@ public class NumberRepositoryIntImpl implements NumberRepositoryInt {
     }
 
     @Override
-    public UserNumberHistory saveUserNumberHistory(UserNumberHistory userNumberHistory) {
+    public Optional<UserNumberHistory> saveUserNumberHistory(UserNumberHistory userNumberHistory) {
         UserNumberHistoryEntity entity = userNumberHistoryEntityConverter.convertUserNumberHistoryToUserNumberHistoryEntity(userNumberHistory);
-        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.saveUserNumberHistory(entity));
+        Optional<UserNumberHistoryEntity> userNumberHistoryEntity = userNumberHistoryLocalServiceInt.saveUserNumberHistory(entity);
+        if (!userNumberHistoryEntity.isPresent()) {
+            throw new IllegalStateException("userNumberHistoryEntity is null");
+        }
+        return Optional.ofNullable(userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(
+                userNumberHistoryEntity.get()
+        ));
     }
 
     @Override
-    @Nullable
-    public UserNumberHistory getUserNumberHistoryByPrimaryKey(Long primaryKey) {
-        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(userNumberHistoryLocalServiceInt.getUserNumberHistoryByPrimaryKey(primaryKey));
+    public Optional<UserNumberHistory> getUserNumberHistoryByPrimaryKey(Long primaryKey) {
+        Optional<UserNumberHistoryEntity> userNumberHistoryByPrimaryKey = userNumberHistoryLocalServiceInt.getUserNumberHistoryByPrimaryKey(primaryKey);
+        if (!userNumberHistoryByPrimaryKey.isPresent()) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(
+                userNumberHistoryByPrimaryKey.get()
+        ));
     }
 
     @Override
-    @Nullable
-    public UserNumberHistory getUserNumberHistoryByDetails(String number) {
-        return userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(Objects.requireNonNull(userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number)));
+    public Optional<UserNumberHistory> getUserNumberHistoryByDetails(String number) {
+        Optional<UserNumberHistoryEntity> userNumberHistoryByDetails = userNumberHistoryLocalServiceInt.getUserNumberHistoryByDetails(number);
+        if (!userNumberHistoryByDetails.isPresent()) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(
+                userNumberHistoryEntityConverter.convertUserNumberHistoryEntityToUserNumberHistory(
+                        userNumberHistoryByDetails.get()
+                )
+        );
     }
 
     @Override

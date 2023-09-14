@@ -12,6 +12,7 @@ import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
 
 import java.util.List;
+import java.util.Optional;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.BackpressureStrategy;
@@ -69,7 +70,7 @@ public class FragmentMainPageViewModel extends ViewModel {
         return getUserNumbersHistoryUseCase.execute();
     }
 
-    public UserNumberHistory saveUserNumberHistory(UserNumberHistory userNumberHistory) {
+    public Optional<UserNumberHistory> saveUserNumberHistory(UserNumberHistory userNumberHistory) {
         return saveUserNumberHistoryUseCase.execute(userNumberHistory);
     }
 

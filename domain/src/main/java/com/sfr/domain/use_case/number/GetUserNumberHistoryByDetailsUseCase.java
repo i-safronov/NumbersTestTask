@@ -3,6 +3,8 @@ package com.sfr.domain.use_case.number;
 import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.domain.repository.NumberRepositoryInt;
 
+import java.util.Optional;
+
 import io.reactivex.rxjava3.annotations.Nullable;
 
 public class GetUserNumberHistoryByDetailsUseCase {
@@ -13,13 +15,8 @@ public class GetUserNumberHistoryByDetailsUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    @Nullable UserNumberHistory execute(UserNumberHistory userNumberHistory) {
-        try {
-            return numberRepositoryInt.getUserNumberHistoryByDetails(userNumberHistory.getNumberModel().getNumber());
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return null;
-        }
+    @Nullable Optional<UserNumberHistory> execute(UserNumberHistory userNumberHistory) {
+        return numberRepositoryInt.getUserNumberHistoryByDetails(userNumberHistory.getNumberModel().getNumber());
     }
 
 }

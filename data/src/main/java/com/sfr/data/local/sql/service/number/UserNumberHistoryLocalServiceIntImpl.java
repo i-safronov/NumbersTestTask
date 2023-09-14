@@ -4,6 +4,7 @@ import com.sfr.data.exception.DataException;
 import com.sfr.data.local.sql.dao.db.model.UserNumberHistoryEntity;
 import com.sfr.data.local.sql.dao.number.UserNumberHistoryDao;
 import java.util.List;
+import java.util.Optional;
 
 import io.reactivex.rxjava3.annotations.Nullable;
 import io.reactivex.rxjava3.core.Observable;
@@ -26,7 +27,7 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
-    public UserNumberHistoryEntity saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory) {
+    public Optional<UserNumberHistoryEntity> saveUserNumberHistory(UserNumberHistoryEntity userNumberHistory) {
         try {
             Long primaryKey = userNumberHistoryDao.saveUserNumberHistory(userNumberHistory);
             return getUserNumberHistoryByPrimaryKey(primaryKey);
@@ -36,10 +37,9 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
-    @Nullable
-    public UserNumberHistoryEntity getUserNumberHistoryByPrimaryKey(Long primaryKey) {
+    public Optional<UserNumberHistoryEntity> getUserNumberHistoryByPrimaryKey(Long primaryKey) {
         try {
-            return userNumberHistoryDao.getUserNumberHistoryByPrimaryKey(primaryKey);
+            return Optional.ofNullable(userNumberHistoryDao.getUserNumberHistoryByPrimaryKey(primaryKey));
         } catch (Exception e) {
             throw new DataException("Data exception: " + e.getMessage(), e);
         }
@@ -51,9 +51,8 @@ public class UserNumberHistoryLocalServiceIntImpl implements UserNumberHistoryLo
     }
 
     @Override
-    @Nullable
-    public UserNumberHistoryEntity getUserNumberHistoryByDetails(String number) {
-        return userNumberHistoryDao.getUserNumberHistoryByDetails(number);
+    public Optional<UserNumberHistoryEntity> getUserNumberHistoryByDetails(String number) {
+        return Optional.ofNullable(userNumberHistoryDao.getUserNumberHistoryByDetails(number));
     }
 
     @Override

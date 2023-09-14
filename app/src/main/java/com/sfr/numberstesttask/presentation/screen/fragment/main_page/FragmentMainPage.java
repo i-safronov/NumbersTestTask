@@ -158,7 +158,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                                         );
                                         observeUserNumbersHistory();
                                     } catch (Exception e) {
-                                        e.printStackTrace();
+                                        Log.e(TAG, "onError: " + e.getMessage());
                                     }
                                 }
 

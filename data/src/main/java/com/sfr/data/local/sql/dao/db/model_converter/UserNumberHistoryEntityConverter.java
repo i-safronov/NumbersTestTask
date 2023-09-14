@@ -5,6 +5,8 @@ import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
 import com.sfr.domain.model.UserNumberHistory;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,11 @@ public class UserNumberHistoryEntityConverter {
     }
 
     public UserNumberHistory convertUserNumberHistoryEntityToUserNumberHistory(
-            UserNumberHistoryEntity userNumberHistory
+            @Nullable UserNumberHistoryEntity userNumberHistory
     ) {
+        if (userNumberHistory == null) {
+            return null;
+        }
         return new UserNumberHistory(
                 new NumberModel(userNumberHistory.getNumber()),
                 new NumberInformationModel(userNumberHistory.getNumberInfo(), userNumberHistory.getNumber()),
