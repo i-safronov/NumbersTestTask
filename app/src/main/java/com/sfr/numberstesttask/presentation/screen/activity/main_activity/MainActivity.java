@@ -3,6 +3,7 @@ package com.sfr.numberstesttask.presentation.screen.activity.main_activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHost;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -32,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupAllContentGraph() {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.all_content_container);
+        assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupActionBarWithNavController(MainActivity.this, navController);
+        NavigationUI.setupWithNavController(binding.allContentToolBar, navController);
     }
 
 }
