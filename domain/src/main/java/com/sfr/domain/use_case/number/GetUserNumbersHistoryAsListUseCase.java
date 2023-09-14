@@ -13,7 +13,7 @@ public class GetUserNumbersHistoryAsListUseCase {
         this.numberRepositoryInt = numberRepositoryInt;
     }
 
-    List<UserNumberHistory> execute() {
+    public List<UserNumberHistory> execute() {
         return numberRepositoryInt.getUserNumbersHistoryAsList();
     }
 

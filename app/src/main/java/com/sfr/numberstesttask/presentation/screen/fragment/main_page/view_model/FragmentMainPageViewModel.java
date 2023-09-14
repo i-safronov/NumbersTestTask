@@ -8,6 +8,7 @@ import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.domain.use_case.number.GetNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
+import com.sfr.domain.use_case.number.GetUserNumbersHistoryAsListUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
 
@@ -30,21 +31,21 @@ public class FragmentMainPageViewModel extends ViewModel {
     private GetNumberInformationUseCase getNumberInformationUseCase;
     private GetRandomNumberInformationUseCase getRandomNumberInformationUseCase;
     private GetUserNumberHistoryByPrimaryKeyUseCase getUserNumberHistoryByPrimaryKeyUseCase;
-    private GetUserNumbersHistoryUseCase getUserNumbersHistoryUseCase;
+    private GetUserNumbersHistoryAsListUseCase getUserNumbersHistoryAsListUseCase;
     private SaveUserNumberHistoryUseCase saveUserNumberHistoryUseCase;
 
     public FragmentMainPageViewModel(
             GetNumberInformationUseCase getNumberInformationUseCase,
             GetRandomNumberInformationUseCase getRandomNumberInformationUseCase,
             GetUserNumberHistoryByPrimaryKeyUseCase getUserNumberHistoryByPrimaryKeyUseCase,
-            GetUserNumbersHistoryUseCase getUserNumbersHistoryUseCase,
+            GetUserNumbersHistoryAsListUseCase getUserNumbersHistoryAsListUseCase,
             SaveUserNumberHistoryUseCase saveUserNumberHistoryUseCase
     ) {
         super();
         this.getNumberInformationUseCase = getNumberInformationUseCase;
         this.getRandomNumberInformationUseCase = getRandomNumberInformationUseCase;
         this.getUserNumberHistoryByPrimaryKeyUseCase = getUserNumberHistoryByPrimaryKeyUseCase;
-        this.getUserNumbersHistoryUseCase = getUserNumbersHistoryUseCase;
+        this.getUserNumbersHistoryAsListUseCase = getUserNumbersHistoryAsListUseCase;
         this.saveUserNumberHistoryUseCase = saveUserNumberHistoryUseCase;
     }
 
@@ -66,8 +67,13 @@ public class FragmentMainPageViewModel extends ViewModel {
         });
     }
 
-    public Observable<List<UserNumberHistory>> getUserNumbersHistory() {
-        return getUserNumbersHistoryUseCase.execute();
+    public Single<List<UserNumberHistory>> getUserNumbersHistory() {
+        return Single.create(new SingleOnSubscribe<List<UserNumberHistory>>() {
+            @Override
+            public void subscribe(@NonNull SingleEmitter<List<UserNumberHistory>> emitter) throws Throwable {
+                emitter.onSuccess(getUserNumbersHistoryAsListUseCase.execute());
+            }
+        });
     }
 
     public Optional<UserNumberHistory> saveUserNumberHistory(UserNumberHistory userNumberHistory) {

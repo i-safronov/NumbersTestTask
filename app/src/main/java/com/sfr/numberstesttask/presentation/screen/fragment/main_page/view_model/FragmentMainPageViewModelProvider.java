@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.sfr.domain.use_case.number.GetNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
+import com.sfr.domain.use_case.number.GetUserNumbersHistoryAsListUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.FragmentMainPage;
@@ -16,20 +17,20 @@ public class FragmentMainPageViewModelProvider implements ViewModelProvider.Fact
     private GetNumberInformationUseCase getNumberInformationUseCase;
     private GetRandomNumberInformationUseCase getRandomNumberInformationUseCase;
     private GetUserNumberHistoryByPrimaryKeyUseCase getUserNumberHistoryByPrimaryKeyUseCase;
-    private GetUserNumbersHistoryUseCase getUserNumbersHistoryUseCase;
+    private GetUserNumbersHistoryAsListUseCase getUserNumbersHistoryAsListUseCase;
     private SaveUserNumberHistoryUseCase saveUserNumberHistoryUseCase;
 
     public FragmentMainPageViewModelProvider(
             GetNumberInformationUseCase getNumberInformationUseCase,
             GetRandomNumberInformationUseCase getRandomNumberInformationUseCase,
             GetUserNumberHistoryByPrimaryKeyUseCase getUserNumberHistoryByPrimaryKeyUseCase,
-            GetUserNumbersHistoryUseCase getUserNumbersHistoryUseCase,
+            GetUserNumbersHistoryAsListUseCase getUserNumbersHistoryAsListUseCase,
             SaveUserNumberHistoryUseCase saveUserNumberHistoryUseCase)
     {
         this.getNumberInformationUseCase = getNumberInformationUseCase;
         this.getRandomNumberInformationUseCase = getRandomNumberInformationUseCase;
         this.getUserNumberHistoryByPrimaryKeyUseCase = getUserNumberHistoryByPrimaryKeyUseCase;
-        this.getUserNumbersHistoryUseCase = getUserNumbersHistoryUseCase;
+        this.getUserNumbersHistoryAsListUseCase = getUserNumbersHistoryAsListUseCase;
         this.saveUserNumberHistoryUseCase = saveUserNumberHistoryUseCase;
     }
 
@@ -40,7 +41,7 @@ public class FragmentMainPageViewModelProvider implements ViewModelProvider.Fact
                 getNumberInformationUseCase,
                 getRandomNumberInformationUseCase,
                 getUserNumberHistoryByPrimaryKeyUseCase,
-                getUserNumbersHistoryUseCase,
+                getUserNumbersHistoryAsListUseCase,
                 saveUserNumberHistoryUseCase
         );
     }

@@ -10,6 +10,7 @@ import com.sfr.domain.use_case.number.GetNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByDetailsUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
+import com.sfr.domain.use_case.number.GetUserNumbersHistoryAsListUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
 import dagger.Module;
@@ -76,6 +77,11 @@ public class DomainModule {
         return new SaveUserNumberHistoryUseCase(
                 numberRepositoryInt, getUserNumberHistoryByDetailsUseCase, deleteUserNumberHistoryUseCaseByDetails
         );
+    }
+
+    @Provides
+    GetUserNumbersHistoryAsListUseCase provideGetUserNumbersHistoryAsListUseCase(NumberRepositoryInt numberRepositoryInt) {
+        return new GetUserNumbersHistoryAsListUseCase(numberRepositoryInt);
     }
 
 }

@@ -21,7 +21,6 @@ public class GetUserNumbersHistoryUseCase {
         return numberRepositoryInt.getUserNumbersHistory().map(new Function<List<UserNumberHistory>, List<UserNumberHistory>>() {
             @Override
             public List<UserNumberHistory> apply(List<UserNumberHistory> list) throws Throwable {
-                Collections.reverse(list);
                 return list;
             }
         });

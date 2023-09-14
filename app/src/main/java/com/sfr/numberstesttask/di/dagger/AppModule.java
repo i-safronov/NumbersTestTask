@@ -5,6 +5,7 @@ import android.content.Context;
 import com.sfr.domain.use_case.number.GetNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetRandomNumberInformationUseCase;
 import com.sfr.domain.use_case.number.GetUserNumberHistoryByPrimaryKeyUseCase;
+import com.sfr.domain.use_case.number.GetUserNumbersHistoryAsListUseCase;
 import com.sfr.domain.use_case.number.GetUserNumbersHistoryUseCase;
 import com.sfr.domain.use_case.number.SaveUserNumberHistoryUseCase;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.view_model.FragmentMainPageViewModelProvider;
@@ -31,14 +32,14 @@ public class AppModule {
             GetNumberInformationUseCase getNumberInformationUseCase,
             GetRandomNumberInformationUseCase getRandomNumberInformationUseCase,
             GetUserNumberHistoryByPrimaryKeyUseCase getUserNumberHistoryByPrimaryKeyUseCase,
-            GetUserNumbersHistoryUseCase getUserNumbersHistoryUseCase,
+            GetUserNumbersHistoryAsListUseCase getUserNumbersHistoryAsListUseCase,
             SaveUserNumberHistoryUseCase saveUserNumberHistoryUseCase
     ) {
         return new FragmentMainPageViewModelProvider(
                 getNumberInformationUseCase,
                 getRandomNumberInformationUseCase,
                 getUserNumberHistoryByPrimaryKeyUseCase,
-                getUserNumbersHistoryUseCase,
+                getUserNumbersHistoryAsListUseCase,
                 saveUserNumberHistoryUseCase
         );
     }
