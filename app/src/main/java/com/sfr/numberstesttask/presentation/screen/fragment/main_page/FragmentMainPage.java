@@ -87,11 +87,15 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
     }
 
     private void showDataIsLoading() {
-        loadingDataAlertDialog.show();
+        if (loadingDataAlertDialog != null) {
+            loadingDataAlertDialog.show();
+        }
     }
 
     private void showDataLoaded() {
-        loadingDataAlertDialog.dismiss();
+        if (loadingDataAlertDialog != null) {
+            loadingDataAlertDialog.dismiss();
+        }
     }
 
     private void showWasException() {
@@ -298,6 +302,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
     @Override
     public void onDestroyView() {
+        loadingDataAlertDialog = null;
         binding = null;
         super.onDestroyView();
     }
