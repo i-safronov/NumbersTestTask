@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -100,9 +101,43 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
             observeUserNumbersHistory();
             edtvNumberOnTextChangeListener();
             btnGetNumberInfoOnClickListener();
+            btnGetRandomNumberInfoListener();
         } catch (Exception e) {
             Log.e(TAG, className + " , " + e.getMessage());
         }
+    }
+
+    private void btnGetRandomNumberInfoListener() {
+        binding.btnGetRandomNumberInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentMainPageViewModel.getRandomNumberInformation()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(Schedulers.io())
+                        .subscribe(new SingleObserver<NumberInformationModel>() {
+                            @Override
+                            public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                                Log.d(TAG, "onSubscribe");
+                            }
+
+                            @Override
+                            public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull NumberInformationModel numberInformationModel) {
+                                fragmentMainPageViewModel.saveUserNumberHistory(
+                                        new UserNumberHistory(
+                                                new NumberModel(numberInformationModel.getNumber()),
+                                                numberInformationModel
+                                        )
+                                );
+                                observeUserNumbersHistory();
+                            }
+
+                            @Override
+                            public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                Log.e(TAG, "onError: " + e.getMessage());
+                            }
+                        });
+            }
+        });
     }
 
     private void observeUserNumbersHistory() {
@@ -132,7 +167,6 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         binding.btnGetNumberInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String userNumber = binding.edtvNumber.getText().toString().trim();
                 if (userNumber.isEmpty()) {
                     binding.edtvNumber.setError(getString(R.string.write_something));
