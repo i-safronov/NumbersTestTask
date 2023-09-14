@@ -9,4 +9,6 @@
     <string name="write_something">Введите что-то</string>
     <string name="number">Число</string>
     <string name="wait_data_is_loading">Секундочку, данные загружаются...</string>
+    <string name="was_exception">Произошла ошибка...</string>
+    <string name="ok">OK</string>
 </resources>

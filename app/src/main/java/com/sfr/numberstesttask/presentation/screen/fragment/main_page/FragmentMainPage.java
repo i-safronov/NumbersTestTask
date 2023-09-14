@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.sfr.data.local.sql.dao.db.model_converter.UserNumberHistoryEntityConverter;
 import com.sfr.domain.model.NumberInformationModel;
 import com.sfr.domain.model.NumberModel;
@@ -41,6 +42,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryInt {
@@ -49,7 +51,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
     private final String TAG = "sfrLog";
     private AlertDialog loadingDataAlertDialog;
     private FragmentMainPageBinding binding;
-    private RcvUserNumbersHistory rcvUserNumbersHistory = new RcvUserNumbersHistory(FragmentMainPage.this);
+    private final RcvUserNumbersHistory rcvUserNumbersHistory = new RcvUserNumbersHistory(FragmentMainPage.this);
 
     @Inject
     public FragmentMainPageViewModelProvider fragmentMainPageViewModelProvider;
@@ -92,6 +94,17 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         loadingDataAlertDialog.dismiss();
     }
 
+    private void showWasException() {
+        Snackbar snackbar = Snackbar.make(binding.getRoot(), getString(R.string.was_exception), Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(getString(R.string.ok), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+        snackbar.show();
+    }
+
     private void init() {
         ((App) requireContext().getApplicationContext()).getAppComponent().inject(FragmentMainPage.this);
     }
@@ -128,6 +141,13 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                 fragmentMainPageViewModel.getRandomNumberInformation()
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
+                        .doOnError(new Consumer<Throwable>() {
+                            @Override
+                            public void accept(Throwable throwable) throws Throwable {
+                                showDataLoaded();
+                                showWasException();
+                            }
+                        })
                         .subscribe(new SingleObserver<NumberInformationModel>() {
                             @Override
                             public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
@@ -153,6 +173,13 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         fragmentMainPageViewModel.getUserNumbersHistory()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Throwable {
+                        showDataLoaded();
+                        showWasException();
+                    }
+                })
                 .subscribe(new SingleObserver<List<UserNumberHistory>>() {
                     @Override
                     public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
@@ -186,6 +213,13 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                     numberInformation
                             .subscribeOn(Schedulers.io())
                             .observeOn(Schedulers.io())
+                            .doOnError(new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Throwable {
+                                    showDataLoaded();
+                                    showWasException();
+                                }
+                            })
                             .subscribe(new SingleObserver<NumberInformationModel>() {
                                 @Override
                                 public void onSubscribe(@NonNull Disposable d) {
