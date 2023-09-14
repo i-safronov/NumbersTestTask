@@ -12,6 +12,8 @@
         android:id="@+id/edtv_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="@dimen/min_height"
+        android:hint="@string/number"
         style="@style/edit_text" />
 
     <Button

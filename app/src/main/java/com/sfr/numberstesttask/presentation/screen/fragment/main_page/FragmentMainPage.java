@@ -1,5 +1,6 @@
 package com.sfr.numberstesttask.presentation.screen.fragment.main_page;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.sfr.domain.model.NumberModel;
 import com.sfr.domain.model.UserNumberHistory;
 import com.sfr.numberstesttask.R;
 import com.sfr.numberstesttask.app.App;
+import com.sfr.numberstesttask.databinding.AlertDialogNotificationBinding;
 import com.sfr.numberstesttask.databinding.FragmentMainPageBinding;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.rcv.RcvUserNumbersHistory;
 import com.sfr.numberstesttask.presentation.screen.fragment.main_page.rcv.RcvUserNumbersHistoryInt;
@@ -45,6 +47,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
 
     private final String className = FragmentMainPage.this.getClass().getName();
     private final String TAG = "sfrLog";
+    private AlertDialog loadingDataAlertDialog;
     private FragmentMainPageBinding binding;
     private RcvUserNumbersHistory rcvUserNumbersHistory = new RcvUserNumbersHistory(FragmentMainPage.this);
 
@@ -61,6 +64,8 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
     {
         binding = FragmentMainPageBinding.inflate(inflater, container, false);
         try {
+            setupLoadingDataAlertDialog();
+            showDataIsLoading();
             init();
             setupViewModel();
             setupView();
@@ -69,6 +74,22 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
             Toast.makeText(requireContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
         }
         return binding.getRoot();
+    }
+
+    private void setupLoadingDataAlertDialog() {
+        loadingDataAlertDialog = new AlertDialog.Builder(requireContext()).create();
+        AlertDialogNotificationBinding alertDialogView = AlertDialogNotificationBinding.inflate(getLayoutInflater());
+        alertDialogView.tvTitle.setText(getString(R.string.wait_data_is_loading));
+        loadingDataAlertDialog.setView(alertDialogView.getRoot());
+        loadingDataAlertDialog.setCancelable(false);
+    }
+
+    private void showDataIsLoading() {
+        loadingDataAlertDialog.show();
+    }
+
+    private void showDataLoaded() {
+        loadingDataAlertDialog.dismiss();
     }
 
     private void init() {
@@ -93,6 +114,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
             edtvNumberOnTextChangeListener();
             btnGetNumberInfoOnClickListener();
             btnGetRandomNumberInfoListener();
+            showDataLoaded();
         } catch (Exception e) {
             Log.e(TAG, className + " , " + e.getMessage());
         }
@@ -102,6 +124,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
         binding.btnGetRandomNumberInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showDataIsLoading();
                 fragmentMainPageViewModel.getRandomNumberInformation()
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
@@ -140,7 +163,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<UserNumberHistory> list) {
                         Collections.reverse(list);
                         rcvUserNumbersHistory.submitList(list);
-                        Log.d(TAG, "result: " + list.size());
+                        showDataLoaded();
                     }
 
                     @Override
@@ -158,6 +181,7 @@ public class FragmentMainPage extends Fragment implements RcvUserNumbersHistoryI
                 if (userNumber.isEmpty()) {
                     binding.edtvNumber.setError(getString(R.string.write_something));
                 } else {
+                    showDataIsLoading();
                     Single<NumberInformationModel> numberInformation = fragmentMainPageViewModel.getNumberInformation(new NumberModel(userNumber));
                     numberInformation
                             .subscribeOn(Schedulers.io())

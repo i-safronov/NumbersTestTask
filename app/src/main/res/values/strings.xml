@@ -7,4 +7,6 @@
     <string name="number_details">Детали о числе</string>
     <string name="something_went_wrong">Что-то пошло не так</string>
     <string name="write_something">Введите что-то</string>
+    <string name="number">Число</string>
+    <string name="wait_data_is_loading">Секундочку, данные загружаются...</string>
 </resources>
